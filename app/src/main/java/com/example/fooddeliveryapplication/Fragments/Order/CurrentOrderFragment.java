@@ -24,7 +24,7 @@ public class CurrentOrderFragment extends Fragment {
     private ArrayList<Bill> dsBill;
     private String userId;
 
-    public CurrentOrderFragment(ArrayList<Bill> ds,String id) {
+    public CurrentOrderFragment(ArrayList<Bill> ds, String id) {
         dsBill = ds;
         userId = id;
     }
@@ -32,11 +32,11 @@ public class CurrentOrderFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentCurrentOrderBinding.inflate(inflater,container,false);
+        binding = FragmentCurrentOrderBinding.inflate(inflater, container, false);
 
-        OrderAdapter adapter=new OrderAdapter(getContext(), dsBill, OrderActivity.CURRENT_ORDER, userId);
+        OrderAdapter adapter = new OrderAdapter(getContext(), dsBill, OrderActivity.CURRENT_ORDER, userId);
         binding.ryc.setAdapter(adapter);
-        binding.ryc.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL,false));
+        binding.ryc.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
 
         return binding.getRoot();
     }

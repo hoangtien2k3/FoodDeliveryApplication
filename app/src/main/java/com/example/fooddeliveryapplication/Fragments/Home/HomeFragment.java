@@ -26,7 +26,7 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentHomeBinding.inflate(inflater,container,false);
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
 
         initUI();
 
@@ -35,25 +35,25 @@ public class HomeFragment extends Fragment {
 
     private void initUI() {
         //Set adapter cho recycleView
-        FoodDrinkAdapter adapter1=new FoodDrinkAdapter(HomeFragment.this, userId);
+        FoodDrinkAdapter adapter1 = new FoodDrinkAdapter(HomeFragment.this, userId);
         binding.viewpaperHome.setAdapter(adapter1);
         binding.viewpaperHome.setUserInputEnabled(false);
         binding.layoutSearchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getActivity(), FindActivity.class);
-                intent.putExtra("userId",userId);
+                Intent intent = new Intent(getActivity(), FindActivity.class);
+                intent.putExtra("userId", userId);
                 startActivity(intent);
             }
         });
         //Tạo Tab
-        new TabLayoutMediator(binding.tabHome,binding.viewpaperHome, ((tab, position) -> {
+        new TabLayoutMediator(binding.tabHome, binding.viewpaperHome, ((tab, position) -> {
             switch (position) {
                 case 0:
-                    tab.setText("Food");
+                    tab.setText("Đồ ăn");
                     break;
                 case 1:
-                    tab.setText("Drink");
+                    tab.setText("Trà sữa");
                     break;
             }
         })).attach();

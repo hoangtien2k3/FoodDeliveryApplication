@@ -28,7 +28,7 @@
             android:id="@+id/loginText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Welcome to FIVEST"
+            android:text="Đăng nhập"
             android:textAlignment="center"
             android:textColor="@color/app_color2"
             android:textSize="24sp"
@@ -74,7 +74,7 @@
                 android:layout_width="150dp"
                 android:layout_height="30dp"
                 android:gravity="center"
-                android:text="Forgot password"
+                android:text="Quên mật khẩu ?"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -90,7 +90,7 @@
             android:layout_margin="10dp"
             android:layout_gravity="center"
             android:hint="if (tmp.getRecipientId().equalsIgnoreCase(LoginActivity.getCurrentUser().getUserId()))"
-            android:text="Login"/>
+            android:text="Đăng nhập"/>
 
 
 

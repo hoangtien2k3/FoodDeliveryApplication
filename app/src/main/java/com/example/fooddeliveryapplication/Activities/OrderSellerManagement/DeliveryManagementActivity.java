@@ -34,7 +34,7 @@ public class DeliveryManagementActivity extends AppCompatActivity {
         //get input
         userId = getIntent().getStringExtra("userId");
 
-        statusPagerAdapter = new StatusManagementPagerAdapter(this,userId);
+        statusPagerAdapter = new StatusManagementPagerAdapter(this, userId);
         binding.viewPagerStatus.setAdapter(statusPagerAdapter);
 
 
@@ -52,10 +52,12 @@ public class DeliveryManagementActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {}
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
 
             @Override
-            public void onTabReselected(TabLayout.Tab tab) {}
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
         });
         binding.viewPagerStatus.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override

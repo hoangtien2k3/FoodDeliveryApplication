@@ -108,7 +108,7 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Product product = snapshot.getValue(Product.class);
                 holder.binding.productName.setText(product.getProductName());
-                holder.binding.productPrice.setText(convertToMoney(product.getProductPrice())+"đ");
+                holder.binding.productPrice.setText(convertToMoney(product.getProductPrice()) + "đ");
                 Glide.with(mContext).load(product.getProductImage1()).placeholder(R.mipmap.ic_launcher).into(holder.binding.productImage);
                 holder.binding.productAmount.setText(String.valueOf(cartInfo.getAmount()));
             }
@@ -130,9 +130,8 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
                         int amount = Integer.parseInt(holder.binding.productAmount.getText().toString());
                         int remainAmount = snapshot.getValue(int.class);
                         if (amount >= remainAmount) {
-                            new FailToast(mContext, "Can't add anymore!").showToast();
-                        }
-                        else {
+                            new FailToast(mContext, "Không thể thêm nữa!").showToast();
+                        } else {
                             // Change display value
                             amount++;
                             holder.binding.productAmount.setText(String.valueOf(amount));
@@ -260,9 +259,8 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
 
                         }
                     });
-                }
-                else {
-                    new FailToast(mContext, "Can't reduce anymore!").showToast();
+                } else {
+                    new FailToast(mContext, "Không thể giảm được nữa!").showToast();
                 }
             }
         });
@@ -273,11 +271,10 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
                 if (holder.binding.like.getTag().equals("like")) {
                     FirebaseDatabase.getInstance().getReference().child("Favorites").child(userId).child(cartInfo.getProductId()).setValue(true);
                     pushNotificationFavourite(cartInfo);
-                    new SuccessfulToast(mContext,"Added to your favourite list").showToast();
-                }
-                else if (holder.binding.like.getTag().equals("liked")) {
+                    new SuccessfulToast(mContext, "Đã thêm vào danh sách yêu thích của bạn").showToast();
+                } else if (holder.binding.like.getTag().equals("liked")) {
                     FirebaseDatabase.getInstance().getReference().child("Favorites").child(userId).child(cartInfo.getProductId()).removeValue();
-                    new SuccessfulToast(mContext, "Removed from your favourite list").showToast();
+                    new SuccessfulToast(mContext, "Đã xóa khỏi danh sách yêu thích của bạn").showToast();
                 }
             }
         });
@@ -285,7 +282,7 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
         holder.binding.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new CustomAlertDialog(mContext,"Delete this product?");
+                new CustomAlertDialog(mContext, "Xóa sản phẩm này ?");
                 CustomAlertDialog.binding.btnYes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -295,7 +292,7 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    new SuccessfulToast(mContext, "Delete product successfully!").showToast();
+                                    new SuccessfulToast(mContext, "Xóa sản phẩm thành công!").showToast();
                                     if (adapterItemListener != null) {
                                         adapterItemListener.onDeleteProduct();
                                     }
@@ -312,7 +309,7 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         Product product = snapshot.getValue(Product.class);
                                         int totalAmount = cart.getTotalAmount() - cartInfo.getAmount();
-                                        long totalPrice = cart.getTotalPrice() - (long)(product.getProductPrice() * cartInfo.getAmount());
+                                        long totalPrice = cart.getTotalPrice() - (long) (product.getProductPrice() * cartInfo.getAmount());
 
                                         HashMap<String, Object> map = new HashMap<>();
                                         map.put("totalAmount", totalAmount);
@@ -368,8 +365,7 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
                             checkedItemCount += cartInfo.getAmount();
                             checkedItemPrice += cartInfo.getAmount() * product.getProductPrice();
                             selectedItems.add(cartInfo);
-                        }
-                        else {
+                        } else {
                             checkedItemCount -= cartInfo.getAmount();
                             checkedItemPrice -= cartInfo.getAmount() * product.getProductPrice();
                             selectedItems.removeIf(c -> (c.getCartInfoId().equals(cartInfo.getCartInfoId())));
@@ -434,8 +430,7 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
                 if (snapshot.child(productId).exists()) {
                     imageButton.setImageResource(R.drawable.ic_liked);
                     imageButton.setTag("liked");
-                }
-                else {
+                } else {
                     imageButton.setImageResource(R.drawable.ic_like);
                     imageButton.setTag("like");
                 }
@@ -457,8 +452,7 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
             if (count == 0) {
                 count = 3;
                 output = "," + temp.charAt(i) + output;
-            }
-            else {
+            } else {
                 output = temp.charAt(i) + output;
             }
         }
@@ -495,17 +489,17 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
             this.binding = binding;
         }
     }
-    public void pushNotificationFavourite(CartInfo cartInfo)
-    {
+
+    public void pushNotificationFavourite(CartInfo cartInfo) {
         new FirebaseProductInfoHelper(cartInfo.getProductId()).readInformationById(new FirebaseProductInfoHelper.DataStatusInformationOfProduct() {
             @Override
             public void DataIsLoaded(Product product) {
-                String title = "Favourite product";
-                String content = userName + " liked your product: "+ product.getProductName() + ". Go to Product Information to check it.";
-                Notification notification = FirebaseNotificationHelper.createNotification(title,content,product.getProductImage1(),product.getProductId(),"None","None", null);
+                String title = "Sản phẩm yêu thích";
+                String content = userName + " thích sản phẩm của bạn: " + product.getProductName() + ". Vào Thông tin sản phẩm để kiểm tra.";
+                Notification notification = FirebaseNotificationHelper.createNotification(title, content, product.getProductImage1(), product.getProductId(), "None", "None", null);
                 new FirebaseNotificationHelper(mContext).addNotification(product.getPublisherId(), notification, new FirebaseNotificationHelper.DataStatus() {
                     @Override
-                    public void DataIsLoaded(List<Notification> notificationList,List<Notification> notificationListToNotify) {
+                    public void DataIsLoaded(List<Notification> notificationList, List<Notification> notificationListToNotify) {
 
                     }
 

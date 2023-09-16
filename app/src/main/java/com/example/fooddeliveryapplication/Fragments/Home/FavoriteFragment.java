@@ -22,7 +22,7 @@ public class FavoriteFragment extends Fragment {
     private FragmentFavoriteBinding binding;
     private String userId;
 
-    public FavoriteFragment(String id ) {
+    public FavoriteFragment(String id) {
         userId = id;
     }
 
@@ -38,15 +38,14 @@ public class FavoriteFragment extends Fragment {
         return view;
     }
 
-    public void readFavouriteList()
-    {
+    public void readFavouriteList() {
         new FirebaseFavouriteUserHelper().readFavouriteList(userId, new FirebaseFavouriteUserHelper.DataStatus() {
             @Override
-            public void DataIsLoaded(ArrayList<Product> favouriteProducts,ArrayList<String> keys) {
-                StaggeredGridLayoutManager layoutManager=new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+            public void DataIsLoaded(ArrayList<Product> favouriteProducts, ArrayList<String> keys) {
+                StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
                 binding.recFavouriteFood.setLayoutManager(layoutManager);
                 binding.recFavouriteFood.setHasFixedSize(true);
-                FavouriteFoodAdapter adapter = new FavouriteFoodAdapter(getContext(),favouriteProducts,userId);
+                FavouriteFoodAdapter adapter = new FavouriteFoodAdapter(getContext(), favouriteProducts, userId);
                 binding.recFavouriteFood.setAdapter(adapter);
                 binding.progressBarFavouriteList.setVisibility(View.GONE);
             }

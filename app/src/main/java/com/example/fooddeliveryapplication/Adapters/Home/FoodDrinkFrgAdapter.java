@@ -29,8 +29,7 @@ public class FoodDrinkFrgAdapter extends RecyclerView.Adapter {
     private String userName;
     private final Context mContext;
 
-    public FoodDrinkFrgAdapter(ArrayList<Product> ds, String id, Context context)
-    {
+    public FoodDrinkFrgAdapter(ArrayList<Product> ds, String id, Context context) {
         mContext = context;
         this.ds = ds;
         userId = id;
@@ -51,12 +50,12 @@ public class FoodDrinkFrgAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(ItemHomeBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false));
+        return new ViewHolder(ItemHomeBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ViewHolder newHolder=(ViewHolder)holder;
+        ViewHolder newHolder = (ViewHolder) holder;
         Product item = ds.get(position);
         Glide.with(newHolder.binding.getRoot())
                 .load(item.getProductImage1())
@@ -89,6 +88,7 @@ public class FoodDrinkFrgAdapter extends RecyclerView.Adapter {
         });
 
     }
+
     @Override
     public int getItemCount() {
         return ds == null ? 0 : ds.size();

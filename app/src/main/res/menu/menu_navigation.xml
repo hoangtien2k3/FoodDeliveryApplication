@@ -4,26 +4,26 @@
 
     <item
         android:id="@+id/profileMenu"
-        android:title="Profile"
         android:icon="@drawable/user_icon"
-        app:cnb_iconColor="@color/main"/>
+        android:title="Hồ sơ cá nhân"
+        app:cnb_iconColor="@color/main" />
 
 
     <item
         android:id="@+id/orderMenu"
-        android:title="Your order"
         android:icon="@drawable/order_icon"
-        app:cnb_iconColor="@color/main"/>
+        android:title="Đơn hàng của bạn"
+        app:cnb_iconColor="@color/main" />
 
     <item
         android:id="@+id/myShopMenu"
-        android:title="My shop"
         android:icon="@drawable/shop_icon"
-        app:cnb_iconColor="@color/main"/>
+        android:title="Cửa hàng của bạn"
+        app:cnb_iconColor="@color/main" />
     <item
         android:id="@+id/logoutMenu"
-        android:title="Log Out"
         android:icon="@drawable/logout_icon"
-        app:cnb_iconColor="@color/main"/>
+        android:title="Đăng xuất"
+        app:cnb_iconColor="@color/main" />
 
 </menu>

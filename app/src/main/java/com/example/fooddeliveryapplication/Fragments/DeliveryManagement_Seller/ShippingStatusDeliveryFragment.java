@@ -43,8 +43,7 @@ public class ShippingStatusDeliveryFragment extends Fragment {
                 binding.progressBarShippingDelivery.setVisibility(View.GONE);
                 if (isExistingBill) {
                     binding.txtNoneItem.setVisibility(View.GONE);
-                }
-                else {
+                } else {
                     binding.txtNoneItem.setVisibility(View.VISIBLE);
                 }
             }

@@ -14,24 +14,24 @@
         android:id="@+id/toolbar"/>
 
     <TextView
+        android:id="@+id/delivery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Delivery Information"
-        android:textSize="34sp"
         android:layout_below="@id/toolbar"
         android:layout_marginStart="25dp"
         android:layout_marginTop="10dp"
-        android:id="@+id/delivery"/>
+        android:text="Thông tin vận chuyển"
+        android:textSize="34sp" />
 
     <TextView
+        android:id="@+id/address_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Address detail"
-        android:textSize="18sp"
         android:layout_below="@id/delivery"
         android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
-        android:id="@+id/address_detail"/>
+        android:text="Địa chỉ chi tiết"
+        android:textSize="18sp" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -62,26 +62,26 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/receiver_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Your full name"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="20dp"
-                android:id="@+id/receiver_name"/>
+                android:layout_marginTop="10dp"
+                android:text="Tên đầy đủ"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/detail_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Your detail address"
-                android:maxLines="2"
-                android:ellipsize="end"
-                android:textSize="16sp"
-                android:layout_marginTop="0dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="0dp"
                 android:layout_marginEnd="20dp"
-                android:id="@+id/detail_address" />
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="địa chỉ chi tiết"
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -100,14 +100,14 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
+        android:id="@+id/products"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Order detail"
-        android:textSize="18sp"
         android:layout_below="@id/address_container"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="25dp"
-        android:id="@+id/products"/>
+        android:layout_marginTop="20dp"
+        android:text="Chi tiết đơn đặt"
+        android:textSize="18sp" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="330dp"
@@ -145,28 +145,28 @@
     </androidx.cardview.widget.CardView>
 
     <Button
+        android:id="@+id/complete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="50dp"
-        android:background="@drawable/rounded_button"
-        android:layout_alignParentBottom="true"
-        android:text="Complete"
-        android:textColor="@color/white"
         android:layout_marginBottom="10dp"
-        android:id="@+id/complete"
-        android:elevation="20dp"/>
+        android:background="@drawable/rounded_button"
+        android:elevation="20dp"
+        android:text="Hoàn thành"
+        android:textColor="@color/white" />
 
     <TextView
+        android:id="@+id/total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Total "
-        android:textSize="18sp"
         android:layout_above="@id/complete"
         android:layout_alignParentStart="true"
         android:layout_marginStart="25dp"
         android:layout_marginBottom="20dp"
-        android:id="@+id/total"/>
+        android:text="Tổng cộng"
+        android:textSize="18sp" />
 
     <TextView
         android:layout_width="wrap_content"

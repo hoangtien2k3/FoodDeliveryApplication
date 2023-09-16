@@ -38,15 +38,15 @@ public class UpdateAddAddressActivity extends AppCompatActivity {
         initToolbar();
 
         if (mode.equals("add - default")) {
-            binding.updateComplete.setText("Complete");
+            binding.updateComplete.setText("Hoàn thành");
             binding.setDefault.setChecked(true);
             binding.setDefault.setEnabled(false);
         }
         else if (mode.equals("add - non-default")) {
-            binding.updateComplete.setText("Complete");
+            binding.updateComplete.setText("Hoàn thành");
         }
         else if (mode.equals("update")) {
-            binding.updateComplete.setText("Update");
+            binding.updateComplete.setText("Cập nhật");
 
             FirebaseDatabase.getInstance().getReference().child("Address").child(userId).child(GlobalConfig.updateAddressId).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -105,7 +105,7 @@ public class UpdateAddAddressActivity extends AppCompatActivity {
                                             }
                                         });
 
-                                        new SuccessfulToast(UpdateAddAddressActivity.this,"Added new address!").showToast();
+                                        new SuccessfulToast(UpdateAddAddressActivity.this,"Đã thêm địa chỉ mới!").showToast();
 
                                         GlobalConfig.choseAddressId = addressId;
                                         Intent intent = new Intent();
@@ -126,7 +126,7 @@ public class UpdateAddAddressActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        new SuccessfulToast(UpdateAddAddressActivity.this, "Added new address!").showToast();
+                                        new SuccessfulToast(UpdateAddAddressActivity.this, "Đã thêm địa chỉ mới!").showToast();
 
                                         GlobalConfig.choseAddressId = addressId;
                                         Intent intent = new Intent();
@@ -163,7 +163,7 @@ public class UpdateAddAddressActivity extends AppCompatActivity {
                                             }
                                         });
 
-                                        new SuccessfulToast(UpdateAddAddressActivity.this, "Updated chose address!").showToast();
+                                        new SuccessfulToast(UpdateAddAddressActivity.this, "Đã cập nhật địa chỉ đã chọn!").showToast();
 
                                         Intent intent = new Intent();
                                         setResult(RESULT_OK, intent);
@@ -179,7 +179,7 @@ public class UpdateAddAddressActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        new SuccessfulToast(UpdateAddAddressActivity.this,"Updated chose address!").showToast();
+                                        new SuccessfulToast(UpdateAddAddressActivity.this,"Đã cập nhật địa chỉ đã chọn!").showToast();
 
                                         Intent intent = new Intent();
                                         setResult(RESULT_OK, intent);
@@ -199,10 +199,10 @@ public class UpdateAddAddressActivity extends AppCompatActivity {
         getWindow().setNavigationBarColor(Color.parseColor("#E8584D"));
         setSupportActionBar(binding.toolbar);
         if (mode.equals("update")) {
-            getSupportActionBar().setTitle("Update address");
+            getSupportActionBar().setTitle("Cập nhật địa chỉ");
         }
         else {
-            getSupportActionBar().setTitle("Add address");
+            getSupportActionBar().setTitle("Thêm địa chỉ");
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         binding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -217,17 +217,17 @@ public class UpdateAddAddressActivity extends AppCompatActivity {
 
     private boolean validateAddressInfo() {
         if (binding.fullName.getText().toString().equals("")) {
-            new FailToast(this, "Receiver name must not be empty!").showToast();
+            new FailToast(this, "Tên người nhận không được để trống!").showToast();
             return false;
         }
 
         if (binding.phoneNumber.getText().toString().equals("")) {
-            new FailToast(this, "Receiver phone number must not be empty!").showToast();
+            new FailToast(this, "Số điện thoại của người nhận không được để trống!").showToast();
             return false;
         }
 
         if (binding.detailAddress.getText().toString().equals("")) {
-            new FailToast(this, "Detail address must not be empty!").showToast();
+            new FailToast(this, "Địa chỉ chi tiết không được để trống!").showToast();
             return false;
         }
 

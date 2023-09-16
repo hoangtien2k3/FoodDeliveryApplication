@@ -24,10 +24,13 @@ public class FirebaseStatusOrderHelper {
     private List<BillInfo> billInfoList = new ArrayList<>();
     private List<Integer> soldValueList = new ArrayList<>();
 
-    public interface DataStatus{
+    public interface DataStatus {
         void DataIsLoaded(List<Bill> bills, boolean isExistingBill);
+
         void DataIsInserted();
+
         void DataIsUpdated();
+
         void DataIsDeleted();
 
     }
@@ -43,8 +46,7 @@ public class FirebaseStatusOrderHelper {
         mReferenceStatusOrder = mDatabase.getReference();
     }
 
-    public void readConfirmBills(String userId, final FirebaseStatusOrderHelper.DataStatus dataStatus)
-    {
+    public void readConfirmBills(String userId, final FirebaseStatusOrderHelper.DataStatus dataStatus) {
         mReferenceStatusOrder.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -52,7 +54,7 @@ public class FirebaseStatusOrderHelper {
                 boolean isExistingBill = false;
                 for (DataSnapshot keyNode : snapshot.child("Bills").getChildren()) {
                     if (keyNode.child("senderId").getValue(String.class).equals(userId)
-                    &&  keyNode.child("orderStatus").getValue(String.class).equals("Confirm")) {
+                            && keyNode.child("orderStatus").getValue(String.class).equals("Confirm")) {
                         Bill bill = keyNode.getValue(Bill.class);
                         bills.add(bill);
                         isExistingBill = true;
@@ -70,18 +72,16 @@ public class FirebaseStatusOrderHelper {
             }
         });
     }
-    public void readShippingBills(String userId, final FirebaseStatusOrderHelper.DataStatus dataStatus)
-    {
+
+    public void readShippingBills(String userId, final FirebaseStatusOrderHelper.DataStatus dataStatus) {
         mReferenceStatusOrder.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 bills.clear();
                 boolean isExistingShippintBill = false;
-                for (DataSnapshot keyNode : snapshot.child("Bills").getChildren())
-                {
+                for (DataSnapshot keyNode : snapshot.child("Bills").getChildren()) {
                     if (keyNode.child("senderId").getValue(String.class).equals(userId)
-                            &&  keyNode.child("orderStatus").getValue(String.class).equals("Shipping"))
-                    {
+                            && keyNode.child("orderStatus").getValue(String.class).equals("Shipping")) {
                         Bill bill = keyNode.getValue(Bill.class);
                         bills.add(bill);
                         isExistingShippintBill = true;
@@ -99,7 +99,8 @@ public class FirebaseStatusOrderHelper {
             }
         });
     }
-    public void readCompletedBills(String userId,final FirebaseStatusOrderHelper.DataStatus dataStatus) {
+
+    public void readCompletedBills(String userId, final FirebaseStatusOrderHelper.DataStatus dataStatus) {
         mReferenceStatusOrder.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -126,7 +127,7 @@ public class FirebaseStatusOrderHelper {
         });
     }
 
-    public void setConfirmToShipping(String billId,final FirebaseStatusOrderHelper.DataStatus dataStatus) {
+    public void setConfirmToShipping(String billId, final FirebaseStatusOrderHelper.DataStatus dataStatus) {
         mReferenceStatusOrder.child("Bills").child(billId).child("orderStatus").setValue("Shipping")
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -137,7 +138,8 @@ public class FirebaseStatusOrderHelper {
                     }
                 });
     }
-    public void setShippingToCompleted(String billId,final FirebaseStatusOrderHelper.DataStatus dataStatus) {
+
+    public void setShippingToCompleted(String billId, final FirebaseStatusOrderHelper.DataStatus dataStatus) {
         mReferenceStatusOrder.child("Bills").child(billId).child("orderStatus").setValue("Completed")
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -155,8 +157,7 @@ public class FirebaseStatusOrderHelper {
         mReferenceStatusOrder.child("BillInfos").child(billId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot keyNode: snapshot.getChildren())
-                {
+                for (DataSnapshot keyNode : snapshot.getChildren()) {
                     BillInfo billInfo = keyNode.getValue(BillInfo.class);
                     billInfoList.add(billInfo);
                 }

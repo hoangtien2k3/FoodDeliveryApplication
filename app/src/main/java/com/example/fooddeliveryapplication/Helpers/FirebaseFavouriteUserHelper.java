@@ -20,10 +20,13 @@ public class FirebaseFavouriteUserHelper {
     private ArrayList<Product> favouriteList;
 
 
-    public interface DataStatus{
-        void DataIsLoaded(ArrayList<Product> favouriteProducts,ArrayList<String> keys);
+    public interface DataStatus {
+        void DataIsLoaded(ArrayList<Product> favouriteProducts, ArrayList<String> keys);
+
         void DataIsInserted();
+
         void DataIsUpdated();
+
         void DataIsDeleted();
     }
 
@@ -31,18 +34,17 @@ public class FirebaseFavouriteUserHelper {
         mDatabase = FirebaseDatabase.getInstance();
         mReferenceFavourite = mDatabase.getReference();
     }
-    public void readFavouriteList(String userId,final FirebaseFavouriteUserHelper.DataStatus dataStatus)
-    {
+
+    public void readFavouriteList(String userId, final FirebaseFavouriteUserHelper.DataStatus dataStatus) {
         mReferenceFavourite.child("Favorites").child(userId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 keyProducts = new ArrayList<>();
                 favouriteList = new ArrayList<>();
-                for (DataSnapshot keyNode: snapshot.getChildren())
-                {
+                for (DataSnapshot keyNode : snapshot.getChildren()) {
                     keyProducts.add(keyNode.getKey());
                 }
-                readProductInfo(keyProducts,dataStatus);
+                readProductInfo(keyProducts, dataStatus);
             }
 
             @Override
@@ -52,8 +54,7 @@ public class FirebaseFavouriteUserHelper {
         });
     }
 
-    public void readProductInfo(ArrayList<String> keys, FirebaseFavouriteUserHelper.DataStatus dataStatus)
-    {
+    public void readProductInfo(ArrayList<String> keys, FirebaseFavouriteUserHelper.DataStatus dataStatus) {
         mReferenceFavourite.child("Products").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -63,7 +64,7 @@ public class FirebaseFavouriteUserHelper {
                 }
 
                 if (dataStatus != null) {
-                    dataStatus.DataIsLoaded(favouriteList,keyProducts);
+                    dataStatus.DataIsLoaded(favouriteList, keyProducts);
                 }
             }
 

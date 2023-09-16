@@ -40,7 +40,7 @@ public class DrinkHomeFrg extends Fragment {
         binding = FragmentDrinkHomeFrgBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity().getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         binding.rycDrinkHome.setLayoutManager(linearLayoutManager);
         binding.rycDrinkHome.setHasFixedSize(true);
         binding.txtSeemoreDrink.setOnClickListener(new View.OnClickListener() {
@@ -52,19 +52,19 @@ public class DrinkHomeFrg extends Fragment {
             }
         });
         initData();
-        adapter=new FoodDrinkFrgAdapter(dsDrink,userId,getContext());
+        adapter = new FoodDrinkFrgAdapter(dsDrink, userId, getContext());
         binding.rycDrinkHome.setAdapter(adapter);
 
         return view;
     }
 
     private void initData() {
-        dsDrink=new ArrayList<>();
+        dsDrink = new ArrayList<>();
 
         FirebaseDatabase.getInstance().getReference("Products").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot item:snapshot.getChildren()) {
+                for (DataSnapshot item : snapshot.getChildren()) {
                     Product tmp = item.getValue(Product.class);
                     if (tmp != null && !tmp.getState().equals("deleted") && tmp.getProductType().equalsIgnoreCase("Drink") && !tmp.getPublisherId().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                         dsDrink.add(tmp);

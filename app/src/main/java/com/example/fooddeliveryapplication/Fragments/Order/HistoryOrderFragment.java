@@ -32,10 +32,10 @@ public class HistoryOrderFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentHistoryOrderBinding.inflate(inflater,container,false);
+        binding = FragmentHistoryOrderBinding.inflate(inflater, container, false);
 
-        OrderAdapter adapter=new OrderAdapter(getContext(),dsBill, OrderActivity.HISTORY_ORDER,userId);
-        binding.ryc.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL,false));
+        OrderAdapter adapter = new OrderAdapter(getContext(), dsBill, OrderActivity.HISTORY_ORDER, userId);
+        binding.ryc.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         binding.ryc.setAdapter(adapter);
 
         return binding.getRoot();

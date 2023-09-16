@@ -15,55 +15,64 @@ import java.util.List;
 
 public class FirebaseProductInfoHelper {
     private FirebaseDatabase mDatabase;
-    private  DatabaseReference mReference;
+    private DatabaseReference mReference;
     private String productId;
     private List<Comment> comments = new ArrayList<>();
 
 
-    public interface DataStatus{
-        void DataIsLoaded(List<Comment> comments, int countRate,List<String> keys);
+    public interface DataStatus {
+        void DataIsLoaded(List<Comment> comments, int countRate, List<String> keys);
+
         void DataIsInserted();
+
         void DataIsUpdated();
+
         void DataIsDeleted();
 
     }
 
-    public interface DataStatusCountFavourite{
+    public interface DataStatusCountFavourite {
         void DataIsLoaded(int countFavourite);
+
         void DataIsInserted();
+
         void DataIsUpdated();
+
         void DataIsDeleted();
 
     }
-    public interface DataStatusInformationOfProduct{
+
+    public interface DataStatusInformationOfProduct {
         void DataIsLoaded(Product product);
+
         void DataIsInserted();
+
         void DataIsUpdated();
+
         void DataIsDeleted();
 
     }
-    public FirebaseProductInfoHelper(String productBranch){
+
+    public FirebaseProductInfoHelper(String productBranch) {
         productId = productBranch;
         mDatabase = FirebaseDatabase.getInstance();
         mReference = mDatabase.getReference();
     }
 
 
-    public void readComments(final DataStatus dataStatus)
-    {
+    public void readComments(final DataStatus dataStatus) {
         mReference.child("Comments").child(productId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 comments.clear();
                 List<String> keys = new ArrayList<>();
-                for (DataSnapshot keyNode : snapshot.getChildren())
-                {
+                for (DataSnapshot keyNode : snapshot.getChildren()) {
                     comments.add(keyNode.getValue(Comment.class));
                     keys.add(keyNode.getKey());
                 }
                 int rate = comments.size();
                 if (dataStatus != null) {
-                    dataStatus.DataIsLoaded(comments,rate,keys);
+                    dataStatus.DataIsLoaded(comments, rate, keys);
                 }
             }
 
@@ -74,16 +83,13 @@ public class FirebaseProductInfoHelper {
         });
     }
 
-    public void countFavourite(final FirebaseProductInfoHelper.DataStatusCountFavourite dataStatusCountFavourite)
-    {
+    public void countFavourite(final FirebaseProductInfoHelper.DataStatusCountFavourite dataStatusCountFavourite) {
         mReference.child("Favorites").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int count = 0;
-                for (DataSnapshot keyNode: snapshot.getChildren())
-                {
-                    if (keyNode.child(productId).exists())
-                    {
+                for (DataSnapshot keyNode : snapshot.getChildren()) {
+                    if (keyNode.child(productId).exists()) {
                         count++;
                     }
                 }
@@ -99,8 +105,7 @@ public class FirebaseProductInfoHelper {
         });
     }
 
-    public void readInformationById(final FirebaseProductInfoHelper.DataStatusInformationOfProduct dataStatusInformationOfProduct)
-    {
+    public void readInformationById(final FirebaseProductInfoHelper.DataStatusInformationOfProduct dataStatusInformationOfProduct) {
         mReference.child("Products").child(productId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

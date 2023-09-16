@@ -35,15 +35,14 @@ public class CompletedStatusDeliveryFragment extends Fragment {
         new FirebaseStatusOrderHelper(userId).readCompletedBills(userId, new FirebaseStatusOrderHelper.DataStatus() {
             @Override
             public void DataIsLoaded(List<Bill> bills, boolean isExistingBill) {
-                StatusOrderRecyclerViewAdapter adapter = new StatusOrderRecyclerViewAdapter(getContext(),bills);
+                StatusOrderRecyclerViewAdapter adapter = new StatusOrderRecyclerViewAdapter(getContext(), bills);
                 binding.recCompletedDelivery.setHasFixedSize(true);
                 binding.recCompletedDelivery.setLayoutManager(new LinearLayoutManager(getContext()));
                 binding.recCompletedDelivery.setAdapter(adapter);
                 binding.progressBarCompletedDelivery.setVisibility(View.GONE);
                 if (isExistingBill) {
                     binding.txtNoneItem.setVisibility(View.GONE);
-                }
-                else {
+                } else {
                     binding.txtNoneItem.setVisibility(View.VISIBLE);
                 }
             }

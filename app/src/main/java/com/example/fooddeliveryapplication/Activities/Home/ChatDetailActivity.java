@@ -167,8 +167,8 @@ public class ChatDetailActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User sender = snapshot.getValue(User.class);
-                String title = "New message";
-                String content = sender.getUserName() + " sent you a new message. Please check it!";
+                String title = "Tin nhắn mới";
+                String content = sender.getUserName() + " đã gửi cho bạn một tin nhắn mới. Xin vui lòng kiểm tra xem nó!";
                 Notification notification;
                 if (!sender.getAvatarURL().equals("")) {
                     notification = FirebaseNotificationHelper.createNotification(title, content, sender.getAvatarURL(), "None", "None", "None", sender);

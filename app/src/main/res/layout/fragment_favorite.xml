@@ -23,7 +23,7 @@
             android:layout_marginLeft="35dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/sfpro_semibold"
-            android:text="My\nFavourites"
+            android:text="Sở thích\nMua hàng"
             android:textColor="#000000"
             android:textSize="36sp"
             app:layout_constraintStart_toStartOf="parent"

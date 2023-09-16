@@ -44,16 +44,16 @@
             <TextView
                 android:id="@+id/txtProductNameInDetail"
                 android:layout_width="0dp"
-                app:layout_constraintWidth_percent="0.75"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="4dp"
-                android:maxLines="1"
                 android:ellipsize="end"
-                android:text="Name"
+                android:maxLines="1"
+                android:text="Tên"
                 android:textSize="18dp"
                 app:layout_constraintStart_toEndOf="@+id/cardView"
-                app:layout_constraintTop_toTopOf="@+id/cardView" />
+                app:layout_constraintTop_toTopOf="@+id/cardView"
+                app:layout_constraintWidth_percent="0.75" />
 
             <TextView
                 android:id="@+id/txtCountInDetail"
@@ -61,9 +61,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="8dp"
-                android:text="Count: 1"
-                android:textSize="12dp"
+                android:text="Đếm: 1"
                 android:textColor="#717171"
+                android:textSize="12dp"
                 app:layout_constraintStart_toEndOf="@+id/cardView"
                 app:layout_constraintTop_toBottomOf="@+id/txtProductNameInDetail" />
 

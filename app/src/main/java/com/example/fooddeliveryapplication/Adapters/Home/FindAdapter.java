@@ -34,10 +34,10 @@ public class FindAdapter extends RecyclerView.Adapter implements Filterable {
     private String userName;
     private Context mContext;
 
-    public FindAdapter(ArrayList<Product> ds, String id,Context context) {
+    public FindAdapter(ArrayList<Product> ds, String id, Context context) {
         this.mContext = context;
-        this.dsAll=ds;
-        this.ds=ds;
+        this.dsAll = ds;
+        this.ds = ds;
         this.userId = id;
         FirebaseDatabase.getInstance().getReference().child("Users").child(userId).addValueEventListener(new ValueEventListener() {
             @Override
@@ -55,22 +55,21 @@ public class FindAdapter extends RecyclerView.Adapter implements Filterable {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(ItemHomeFindLayoutBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false));
+        return new ViewHolder(ItemHomeFindLayoutBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Product item = ds.get(position);
         if (item != null) {
-            ViewHolder viewHolder=(ViewHolder) holder;
+            ViewHolder viewHolder = (ViewHolder) holder;
 
-            if (position==1) {
+            if (position == 1) {
                 RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) viewHolder.itemView.getLayoutParams();
                 int margin = 120;
                 layoutParams.setMargins(0, margin, 0, 0);
                 holder.itemView.setLayoutParams(layoutParams);
-            }
-            else if (position== 0) {
+            } else if (position == 0) {
                 RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) viewHolder.itemView.getLayoutParams();
                 int margin = 50;
                 layoutParams.setMargins(0, margin, 0, 0);
@@ -85,9 +84,9 @@ public class FindAdapter extends RecyclerView.Adapter implements Filterable {
             viewHolder.binding.txtFoodName.setText(item.getProductName());
             double ratingStar = (double) Math.round(item.getRatingStar() * 10) / 10;
             viewHolder.binding.txtRating.setText(ratingStar + "/5.0");
-            if (item.getRatingStar()>=5) {
+            if (item.getRatingStar() >= 5) {
                 viewHolder.binding.imgRate.setImageResource(R.drawable.rating_star_filled);
-            } else if (item.getRatingStar()>=3 && item.getRatingStar()<5) {
+            } else if (item.getRatingStar() >= 3 && item.getRatingStar() < 5) {
                 viewHolder.binding.imgRate.setImageResource(R.drawable.rating_star_half);
             } else {
                 viewHolder.binding.imgRate.setImageResource(R.drawable.rating_star_empty);
@@ -130,21 +129,21 @@ public class FindAdapter extends RecyclerView.Adapter implements Filterable {
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
-                String key=charSequence.toString();
+                String key = charSequence.toString();
                 if (key.isEmpty())
-                    ds=dsAll;
+                    ds = dsAll;
                 else {
-                    ArrayList<Product> tmp=new ArrayList<>();
-                    key=key.toLowerCase();
-                    for (Product item: dsAll) {
+                    ArrayList<Product> tmp = new ArrayList<>();
+                    key = key.toLowerCase();
+                    for (Product item : dsAll) {
                         if (item.getProductName().toLowerCase().contains(key)) {
                             tmp.add(item);
                         }
                     }
-                    ds=tmp;
+                    ds = tmp;
                 }
-                FilterResults results=new FilterResults();
-                results.values=ds;
+                FilterResults results = new FilterResults();
+                results.values = ds;
                 return results;
             }
 

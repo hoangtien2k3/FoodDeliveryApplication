@@ -19,7 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
-public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapter.ViewHolder>{
+public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapter.ViewHolder> {
     private Context mContext;
     private List<CartInfo> mCartInfos;
 
@@ -43,9 +43,9 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Product product = snapshot.getValue(Product.class);
                 holder.binding.orderProductName.setText(product.getProductName());
-                holder.binding.orderProductPrice.setText(convertToMoney(product.getProductPrice())+"đ");
+                holder.binding.orderProductPrice.setText(convertToMoney(product.getProductPrice()) + "đ");
                 Glide.with(mContext.getApplicationContext()).load(product.getProductImage1()).placeholder(R.mipmap.ic_launcher).into(holder.binding.orderProductImage);
-                holder.binding.amount.setText(String.valueOf("Count: "+ cartInfo.getAmount()));
+                holder.binding.amount.setText(String.valueOf("Đếm: " + cartInfo.getAmount()));
             }
 
             @Override
@@ -78,8 +78,7 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
             if (count == 0) {
                 count = 3;
                 output = "," + temp.charAt(i) + output;
-            }
-            else {
+            } else {
                 output = temp.charAt(i) + output;
             }
         }

@@ -40,7 +40,7 @@ public class ProductInfoImageAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ViewHolder viewHolder=(ViewHolder) holder;
+        ViewHolder viewHolder = (ViewHolder) holder;
         Glide.with(mContext)
                 .load(dsImage.get(position))
                 .into(viewHolder.binding.imgFood);

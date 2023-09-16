@@ -40,7 +40,7 @@ public class CurrentProductFragment extends Fragment {
 
         currentAdapter.setData(getListInfoCurrentProduct());
 
-        rcvCurrentProduct.setLayoutManager(new GridLayoutManager(getContext(),1));
+        rcvCurrentProduct.setLayoutManager(new GridLayoutManager(getContext(), 1));
         rcvCurrentProduct.setAdapter(currentAdapter);
 
         return view;

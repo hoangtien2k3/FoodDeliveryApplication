@@ -36,11 +36,11 @@ import java.util.HashMap;
 
 public class MyShopAdapter extends RecyclerView.Adapter {
     private ArrayList<Product> ds;
-    private ViewBinderHelper viewBinderHelper=new ViewBinderHelper();
+    private ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
     private Context context;
     private String userId;
 
-    public MyShopAdapter(ArrayList<Product> ds, Context context,String id) {
+    public MyShopAdapter(ArrayList<Product> ds, Context context, String id) {
         viewBinderHelper.setOpenOnlyOne(true);
         this.ds = ds;
         this.context = context;
@@ -50,14 +50,14 @@ public class MyShopAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutFoodItemBinding.inflate(LayoutInflater.from(context),parent,false));
+        return new ViewHolder(LayoutFoodItemBinding.inflate(LayoutInflater.from(context), parent, false));
     }
 
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Product product = ds.get(position);
-        ViewHolder viewHolder=(ViewHolder) holder;
+        ViewHolder viewHolder = (ViewHolder) holder;
         viewBinderHelper.bind(viewHolder.binding.SwipeRevealLayout, product.getProductId());
 
         viewHolder.binding.txtNameProdiuct.setText(product.getProductName());
@@ -69,7 +69,7 @@ public class MyShopAdapter extends RecyclerView.Adapter {
         viewHolder.binding.imgDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new CustomAlertDialog(context,"Delete this product?");
+                new CustomAlertDialog(context, "Xóa sản phẩm này?");
                 CustomAlertDialog.binding.btnYes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -81,10 +81,10 @@ public class MyShopAdapter extends RecyclerView.Adapter {
                                 if (task.isSuccessful()) {
                                     ds.remove(product);
                                     notifyItemRemoved(position);
-                                    new SuccessfulToast(context, "Delete product successfully!").showToast();
+                                    new SuccessfulToast(context, "Xóa sản phẩm thành công!").showToast();
                                 } else {
-                                    new FailToast(context, "Delete product failed!").showToast();
-                                    Log.e("My Shop","Error remove");
+                                    new FailToast(context, "Xóa sản phẩm không thành công!").showToast();
+                                    Log.e("Cửa hàng của tôi", "Lỗi khi xóa");
                                 }
                             }
                         });
@@ -105,7 +105,7 @@ public class MyShopAdapter extends RecyclerView.Adapter {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                     viewHolder.binding.SwipeRevealLayout.resetPivot();
                 }
-                Intent intent=new Intent(context, AddFoodActivity.class);
+                Intent intent = new Intent(context, AddFoodActivity.class);
                 intent.putExtra("Product updating", product);
                 context.startActivity(intent);
             }
@@ -160,8 +160,7 @@ public class MyShopAdapter extends RecyclerView.Adapter {
             if (count == 0) {
                 count = 3;
                 output = "," + temp.charAt(i) + output;
-            }
-            else {
+            } else {
                 output = temp.charAt(i) + output;
             }
         }

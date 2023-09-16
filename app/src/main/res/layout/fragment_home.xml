@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="35dp"
         android:fontFamily="@font/sfpro_semibold"
-        android:text="Delicious\nFood for you"
+        android:text="Món ngon\nMón ăn ngon cho bạn"
         android:textColor="#000000"
         android:textSize="36sp" />
 

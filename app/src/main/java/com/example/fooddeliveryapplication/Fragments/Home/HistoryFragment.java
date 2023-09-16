@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import com.example.fooddeliveryapplication.databinding.FragmentHistoryBinding;
 
 
-
 public class HistoryFragment extends Fragment {
     private FragmentHistoryBinding binding;
 

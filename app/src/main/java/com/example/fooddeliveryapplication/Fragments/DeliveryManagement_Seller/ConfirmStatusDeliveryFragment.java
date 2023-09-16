@@ -43,21 +43,23 @@ public class ConfirmStatusDeliveryFragment extends Fragment {
                 binding.progressBarConfirmDelivery.setVisibility(View.GONE);
                 if (isExistingBill) {
                     binding.txtNoneItem.setVisibility(View.GONE);
-                }
-                else {
+                } else {
                     binding.txtNoneItem.setVisibility(View.VISIBLE);
                 }
             }
 
 
             @Override
-            public void DataIsInserted() {}
+            public void DataIsInserted() {
+            }
 
             @Override
-            public void DataIsUpdated() {}
+            public void DataIsUpdated() {
+            }
 
             @Override
-            public void DataIsDeleted() {}
+            public void DataIsDeleted() {
+            }
         });
 
 

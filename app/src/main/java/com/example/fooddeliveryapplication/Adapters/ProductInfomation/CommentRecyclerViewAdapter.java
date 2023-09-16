@@ -61,7 +61,7 @@ public class CommentRecyclerViewAdapter extends RecyclerView.Adapter<CommentRecy
         return commentList == null ? 0 : commentList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         private final ItemCommentListBinding binding;
 
         public ViewHolder(@NonNull ItemCommentListBinding binding) {

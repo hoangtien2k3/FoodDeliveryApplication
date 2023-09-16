@@ -21,7 +21,7 @@ public class CurrentAdapter extends RecyclerView.Adapter<CurrentAdapter.CurrentV
         this.mListInfoCurrentProducts = mListInfoCurrentProducts;
     }
 
-    public void setData(List<InfoCurrentProduct> list){
+    public void setData(List<InfoCurrentProduct> list) {
         this.mListInfoCurrentProducts = list;
         notifyDataSetChanged();
     }
@@ -50,7 +50,7 @@ public class CurrentAdapter extends RecyclerView.Adapter<CurrentAdapter.CurrentV
         return mListInfoCurrentProducts == null ? 0 : mListInfoCurrentProducts.size();
     }
 
-    public static class CurrentViewHolder extends RecyclerView.ViewHolder{
+    public static class CurrentViewHolder extends RecyclerView.ViewHolder {
         private final ItemInfoCurrentProductBinding binding;
 
         public CurrentViewHolder(@NonNull ItemInfoCurrentProductBinding binding) {

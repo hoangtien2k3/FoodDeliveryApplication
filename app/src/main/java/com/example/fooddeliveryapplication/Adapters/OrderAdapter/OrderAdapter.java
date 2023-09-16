@@ -45,7 +45,7 @@ public class OrderAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(ItemOrderLayoutBinding.inflate(LayoutInflater.from(context),parent,false));
+        return new ViewHolder(ItemOrderLayoutBinding.inflate(LayoutInflater.from(context), parent, false));
     }
 
     @Override
@@ -53,11 +53,11 @@ public class OrderAdapter extends RecyclerView.Adapter {
         Bill tmp = dsOrder.get(position);
         ViewHolder viewHolder = (ViewHolder) holder;
         if (type == OrderActivity.CURRENT_ORDER) {
-            viewHolder.binding.btnSee.setText("Received");
+            viewHolder.binding.btnSee.setText("Đã nhận");
             viewHolder.binding.btnSee.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    new CustomAlertDialog(context,"Do you want to confirm this order?");
+                    new CustomAlertDialog(context, "Bạn có muốn xác nhận đơn hàng này không?");
                     CustomAlertDialog.binding.btnYes.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -74,7 +74,7 @@ public class OrderAdapter extends RecyclerView.Adapter {
 
                                 @Override
                                 public void DataIsUpdated() {
-                                    new SuccessfulToast(context, "Your order has been changed to completed state!").showToast();
+                                    new SuccessfulToast(context, "Đơn hàng của bạn đã được chuyển sang trạng thái hoàn thành!").showToast();
                                 }
 
                                 @Override
@@ -96,49 +96,47 @@ public class OrderAdapter extends RecyclerView.Adapter {
                 }
             });
 
-        }
-        else {
+        } else {
             viewHolder.binding.txtStatus.setTextColor(Color.parseColor("#48DC7D"));
-            viewHolder.binding.btnSee.setText("Feedback & Rate");
+            viewHolder.binding.btnSee.setText("Phản hồi & Đánh giá");
             if (tmp.isCheckAllComment()) {
                 viewHolder.binding.btnSee.setEnabled(false);
                 viewHolder.binding.btnSee.setBackgroundResource(R.drawable.background_feedback_disnable_button);
-            }
-            else {
+            } else {
                 viewHolder.binding.btnSee.setEnabled(true);
                 viewHolder.binding.btnSee.setBackgroundResource(R.drawable.background_feedback_enable_button);
             }
             viewHolder.binding.btnSee.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent=new Intent(context, OrderDetailActivity.class);
-                    intent.putExtra("Bill",tmp);
-                    intent.putExtra("userId",userId);
+                    Intent intent = new Intent(context, OrderDetailActivity.class);
+                    intent.putExtra("Bill", tmp);
+                    intent.putExtra("userId", userId);
                     context.startActivity(intent);
                 }
             });
         }
 
-        viewHolder.binding.txtId.setText(tmp.getBillId()+"");
-        viewHolder.binding.txtDate.setText(tmp.getOrderDate()+"");
+        viewHolder.binding.txtId.setText(tmp.getBillId() + "");
+        viewHolder.binding.txtDate.setText(tmp.getOrderDate() + "");
         viewHolder.binding.txtStatus.setText(tmp.getOrderStatus());
-        viewHolder.binding.txtTotal.setText(CurrencyFormatter.getFormatter().format(Double.valueOf(tmp.getTotalPrice()))+"");
+        viewHolder.binding.txtTotal.setText(CurrencyFormatter.getFormatter().format(Double.valueOf(tmp.getTotalPrice())) + "");
         viewHolder.binding.getRoot().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent=new Intent(context, OrderDetailActivity.class);
-                    intent.putExtra("Bill",tmp);
-                    intent.putExtra("userId",userId);
-                    context.startActivity(intent);
-                }
-            });
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, OrderDetailActivity.class);
+                intent.putExtra("Bill", tmp);
+                intent.putExtra("userId", userId);
+                context.startActivity(intent);
+            }
+        });
         FirebaseDatabase.getInstance().getReference("BillInfos").child(tmp.getBillId()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //Tạo một BillInfos để lấy ảnh
-                BillInfo tmp= new BillInfo();
-                for (DataSnapshot item: snapshot.getChildren()) {
-                    tmp=item.getValue(BillInfo.class);
+                BillInfo tmp = new BillInfo();
+                for (DataSnapshot item : snapshot.getChildren()) {
+                    tmp = item.getValue(BillInfo.class);
                     break;
                 }
                 FirebaseDatabase.getInstance().getReference("Products").child(tmp.getProductId()).child("productImage1").addListenerForSingleValueEvent(new ValueEventListener() {

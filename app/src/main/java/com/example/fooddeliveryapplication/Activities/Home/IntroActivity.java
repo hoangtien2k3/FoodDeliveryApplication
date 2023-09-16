@@ -40,21 +40,20 @@ public class IntroActivity extends AppCompatActivity {
         ds.add(R.drawable.choice);
         ds.add(R.drawable.delivery);
         ds.add(R.drawable.tracking);
-        IntroAdapter introAdapter = new IntroAdapter(ds,IntroActivity.this);
+        IntroAdapter introAdapter = new IntroAdapter(ds, IntroActivity.this);
         binding.viewpaper.setAdapter(introAdapter);
         binding.viewpaper.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         binding.dotsIndicator.attachTo(binding.viewpaper);
-        new TabLayoutMediator(binding.tablayout, binding.viewpaper, (tab, position)-> {
+        new TabLayoutMediator(binding.tablayout, binding.viewpaper, (tab, position) -> {
         }).attach();
         binding.tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                if (tab.getPosition()==2) {
+                if (tab.getPosition() == 2) {
                     binding.btnNext.setVisibility(View.VISIBLE);
                 } else {
                     binding.btnNext.setVisibility(View.INVISIBLE);
                 }
-
             }
 
             @Override

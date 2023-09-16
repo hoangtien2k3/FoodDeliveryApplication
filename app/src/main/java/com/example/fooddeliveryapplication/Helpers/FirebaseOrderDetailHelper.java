@@ -19,17 +19,25 @@ public class FirebaseOrderDetailHelper {
     private DatabaseReference mReferenceStatusOrder;
 
     List<BillInfo> billInfos = new ArrayList<>();
-    public interface DataStatus{
+
+    public interface DataStatus {
         void DataIsLoaded(String addresss, List<BillInfo> billInfos);
+
         void DataIsInserted();
+
         void DataIsUpdated();
+
         void DataIsDeleted();
 
     }
-    public interface DataStatus2{
+
+    public interface DataStatus2 {
         void DataIsLoaded(Product product);
+
         void DataIsInserted();
+
         void DataIsUpdated();
+
         void DataIsDeleted();
 
     }
@@ -39,19 +47,17 @@ public class FirebaseOrderDetailHelper {
         mReferenceStatusOrder = mDatabase.getReference();
     }
 
-    public void readOrderDetail(String addressId,String userId,String billId,final FirebaseOrderDetailHelper.DataStatus dataStatus )
-    {
+    public void readOrderDetail(String addressId, String userId, String billId, final FirebaseOrderDetailHelper.DataStatus dataStatus) {
         mReferenceStatusOrder.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String addressDetail = snapshot.child("Address").child(userId).child(addressId).child("detailAddress").getValue(String.class);
                 billInfos.clear();
-                for (DataSnapshot keyNode: snapshot.child("BillInfos").child(billId).getChildren())
-                {
+                for (DataSnapshot keyNode : snapshot.child("BillInfos").child(billId).getChildren()) {
                     billInfos.add(keyNode.getValue(BillInfo.class));
                 }
                 if (dataStatus != null) {
-                    dataStatus.DataIsLoaded(addressDetail,billInfos);
+                    dataStatus.DataIsLoaded(addressDetail, billInfos);
                 }
             }
 
@@ -62,8 +68,7 @@ public class FirebaseOrderDetailHelper {
         });
     }
 
-    public void readProductInfo(String productId, final FirebaseOrderDetailHelper.DataStatus2 dataStatus)
-    {
+    public void readProductInfo(String productId, final FirebaseOrderDetailHelper.DataStatus2 dataStatus) {
         mReferenceStatusOrder.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

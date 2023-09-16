@@ -13,7 +13,7 @@ import com.example.fooddeliveryapplication.Fragments.DeliveryManagement_Seller.S
 public class StatusManagementPagerAdapter extends FragmentStateAdapter {
     private String userId;
 
-    public StatusManagementPagerAdapter(@NonNull FragmentActivity fragmentActivity,String Id) {
+    public StatusManagementPagerAdapter(@NonNull FragmentActivity fragmentActivity, String Id) {
         super(fragmentActivity);
         userId = Id;
     }
@@ -21,7 +21,7 @@ public class StatusManagementPagerAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        switch (position){
+        switch (position) {
             case 1:
                 return new ShippingStatusDeliveryFragment(userId);
             case 2:

@@ -122,26 +122,24 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         binding.navigationLeft.bringToFront();
         createActionBar();
 
-        layoutMain=binding.layoutMain;
+        layoutMain = binding.layoutMain;
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(layoutMain.getId(),new HomeFragment(userId))
+                .replace(layoutMain.getId(), new HomeFragment(userId))
                 .commit();
         setEventNavigationBottom();
         setCartNavigation();
         binding.navigationLeft.setNavigationItemSelectedListener(this);
     }
-    
-    private void setCartNavigation()
-    {
+
+    private void setCartNavigation() {
         binding.toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId())
-                {
+                switch (item.getItemId()) {
                     case R.id.message_menu:
-                        Intent intent=new Intent(HomeActivity.this,ChatActivity.class);
-                        intent.putExtra("userId",userId);
+                        Intent intent = new Intent(HomeActivity.this, ChatActivity.class);
+                        intent.putExtra("userId", userId);
                         startActivity(intent);
                         break;
                     case R.id.cart_menu:
@@ -158,14 +156,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
                                                     startActivity(new Intent(HomeActivity.this, EmptyCartActivity.class));
                                                     return;
-                                                }
-                                                else {
-                                                    Intent intent = new Intent(HomeActivity.this,CartActivity.class);
-                                                    intent.putExtra("userId",userId);
+                                                } else {
+                                                    Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+                                                    intent.putExtra("userId", userId);
                                                     startActivity(intent);
                                                     return;
                                                 }
                                             }
+
                                             @Override
                                             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -186,6 +184,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
+
     private void setEventNavigationBottom() {
         binding.bottomNavigation.show(2, true);
         binding.bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.ic_favourite));
@@ -235,7 +234,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     private void createActionBar() {
         setSupportActionBar(binding.toolbar);
-        ActionBar actionBar=getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeAsUpIndicator(R.drawable.menu_icon);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("");
@@ -243,7 +242,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_home_top,menu);
+        getMenuInflater().inflate(R.menu.menu_home_top, menu);
         return true;
     }
 
@@ -274,8 +273,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions,
-                                           @NonNull int[] grantResults)
-    {
+                                           @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode,
                 permissions,
                 grantResults);
@@ -283,16 +281,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         if (requestCode == NOTIFICATION_PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-            }
-            else {
+            } else {
 
             }
         }
         if (requestCode == STORAGE_PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-            }
-            else {
+            } else {
 
             }
         }
@@ -303,26 +299,26 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.profileMenu:
-                Intent intent = new Intent(this,ProfileActivity.class);
-                intent.putExtra("userId",userId);
+                Intent intent = new Intent(this, ProfileActivity.class);
+                intent.putExtra("userId", userId);
                 startActivity(intent);
                 break;
             case R.id.orderMenu:
                 Intent intent1 = new Intent(this, OrderActivity.class);
-                intent1.putExtra("userId",userId);
+                intent1.putExtra("userId", userId);
                 startActivity(intent1);
                 break;
             case R.id.myShopMenu:
                 Intent intent2 = new Intent(this, MyShopActivity.class);
-                intent2.putExtra("userId",userId);
+                intent2.putExtra("userId", userId);
                 startActivity(intent2);
                 break;
             case R.id.logoutMenu:
-                new CustomAlertDialog(HomeActivity.this,"Do you want to logout?");
+                new CustomAlertDialog(HomeActivity.this, "Bạn có muốn đăng xuất ?");
                 CustomAlertDialog.binding.btnYes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        new SuccessfulToast(HomeActivity.this, "Logout successfully!").showToast();
+                        new SuccessfulToast(HomeActivity.this, "Đăng xuất thành công!").showToast();
                         CustomAlertDialog.alertDialog.dismiss();
                         FirebaseAuth.getInstance().signOut();
                         startActivity(new Intent(HomeActivity.this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
@@ -342,21 +338,21 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         return true;
 
     }
+
     public void loadInformationForNavigationBar() {
         // load number of notification not read in bottom navigation bar
         new FirebaseNotificationHelper(this).readNotification(userId, new FirebaseNotificationHelper.DataStatus() {
             @Override
             public void DataIsLoaded(List<Notification> notificationList, List<Notification> notificationListToNotify) {
                 int count = 0;
-                for (int i = 0; i<notificationList.size(); i++) {
+                for (int i = 0; i < notificationList.size(); i++) {
                     if (!notificationList.get(i).isRead()) {
                         count++;
                     }
                 }
                 if (count > 0) {
                     binding.bottomNavigation.setCount(3, String.valueOf(count));
-                }
-                else if (count == 0) {
+                } else if (count == 0) {
                     binding.bottomNavigation.clearCount(3);
                 }
 
@@ -454,8 +450,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
 
             notificationManager.notify(0, builder.build());
-        }
-        else if (!notification.getProductId().equals("None")) {
+        } else if (!notification.getProductId().equals("None")) {
             final String[] userName = new String[1];
             FirebaseDatabase.getInstance().getReference().child("Users").child(userId).addValueEventListener(new ValueEventListener() {
                 @Override
@@ -525,8 +520,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
                 }
             });
-        }
-        else if (!notification.getConfirmId().equals("None")) {
+        } else if (!notification.getConfirmId().equals("None")) {
             Intent intent = new Intent(getApplicationContext(), DeliveryManagementActivity.class);
             intent.putExtra("userId", userId);
             intent.putExtra("notification", notification);
@@ -548,8 +542,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
 
             notificationManager.notify(0, builder.build());
-        }
-        else if (notification.getPublisher() != null) {
+        } else if (notification.getPublisher() != null) {
             Intent intent = new Intent(getApplicationContext(), ChatDetailActivity.class);
             intent.setAction("homeActivity");
             intent.putExtra("notification", notification);

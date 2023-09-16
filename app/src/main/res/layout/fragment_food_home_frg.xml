@@ -14,7 +14,7 @@
         android:layout_gravity="end"
         android:layout_marginEnd="30dp"
         android:fontFamily="@font/sfpro_regular"
-        android:text="See more ->"
+        android:text="Xem thêm ->"
         android:textColor="#FA4A0C"
         android:textSize="16sp" />
 

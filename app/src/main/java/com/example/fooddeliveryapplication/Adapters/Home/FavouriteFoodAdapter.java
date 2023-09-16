@@ -31,7 +31,7 @@ public class FavouriteFoodAdapter extends RecyclerView.Adapter<FavouriteFoodAdap
     private String userName;
     private NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
 
-    public FavouriteFoodAdapter(Context mContext, ArrayList<Product> lists,String id) {
+    public FavouriteFoodAdapter(Context mContext, ArrayList<Product> lists, String id) {
         this.mContext = mContext;
         this.favouriteLists = lists;
         this.userId = id;
@@ -59,13 +59,12 @@ public class FavouriteFoodAdapter extends RecyclerView.Adapter<FavouriteFoodAdap
     public void onBindViewHolder(@NonNull FavouriteFoodAdapter.ViewHolder holder, int position) {
         Product product = favouriteLists.get(position);
         if (product != null) {
-            if (position==1) {
+            if (position == 1) {
                 RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) holder.itemView.getLayoutParams();
                 int margin = 120;
                 layoutParams.setMargins(0, margin, 0, 0);
                 holder.itemView.setLayoutParams(layoutParams);
-            }
-            else if (position== 0) {
+            } else if (position == 0) {
                 RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) holder.itemView.getLayoutParams();
                 int margin = 50;
                 layoutParams.setMargins(0, margin, 0, 0);
@@ -80,9 +79,9 @@ public class FavouriteFoodAdapter extends RecyclerView.Adapter<FavouriteFoodAdap
             holder.binding.txtFavouriteFoodName.setText(product.getProductName());
             double ratingStar = (double) Math.round(product.getRatingStar() * 10) / 10;
             holder.binding.txtFavouriteRating.setText(ratingStar + "/5.0");
-            if (product.getRatingStar()>=5) {
+            if (product.getRatingStar() >= 5) {
                 holder.binding.imgFavouriteRate.setImageResource(R.drawable.rating_star_filled);
-            } else if (product.getRatingStar()>=3 && product.getRatingStar()<5) {
+            } else if (product.getRatingStar() >= 3 && product.getRatingStar() < 5) {
                 holder.binding.imgFavouriteRate.setImageResource(R.drawable.rating_star_half);
             } else {
                 holder.binding.imgFavouriteRate.setImageResource(R.drawable.rating_star_empty);

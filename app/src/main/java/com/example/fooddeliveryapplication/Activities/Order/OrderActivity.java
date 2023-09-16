@@ -24,8 +24,8 @@ public class OrderActivity extends AppCompatActivity {
     private ActivityOrderBinding binding;
     public static final int CURRENT_ORDER = 10001;
     public static final int HISTORY_ORDER = 10002;
-    private ArrayList<Bill> dsCurrentOrder=new ArrayList<>();
-    private ArrayList<Bill> dsHistoryOrder=new ArrayList<>();
+    private ArrayList<Bill> dsCurrentOrder = new ArrayList<>();
+    private ArrayList<Bill> dsHistoryOrder = new ArrayList<>();
     private LoadingDialog dialog;
 
     @Override
@@ -55,13 +55,13 @@ public class OrderActivity extends AppCompatActivity {
         OrderViewPaperAdapter viewPaperAdapter = new OrderViewPaperAdapter(OrderActivity.this, dsCurrentOrder, dsHistoryOrder, userId);
         binding.viewPaper2.setAdapter(viewPaperAdapter);
         binding.viewPaper2.setUserInputEnabled(false);
-        new TabLayoutMediator(binding.tabLayout,binding.viewPaper2, ((tab, position) -> {
+        new TabLayoutMediator(binding.tabLayout, binding.viewPaper2, ((tab, position) -> {
             switch (position) {
                 case 0:
-                    tab.setText("Current Order");
+                    tab.setText("Đơn hàng hiện tại");
                     break;
                 case 1:
-                    tab.setText("History Order");
+                    tab.setText("Lịch sử đơn hàng");
                     break;
             }
         })).attach();
@@ -74,8 +74,8 @@ public class OrderActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dsCurrentOrder.clear();
                 dsHistoryOrder.clear();
-                for (DataSnapshot item:snapshot.getChildren()) {
-                    Bill tmp=item.getValue(Bill.class);
+                for (DataSnapshot item : snapshot.getChildren()) {
+                    Bill tmp = item.getValue(Bill.class);
                     if (tmp.getRecipientId().equalsIgnoreCase(userId)) {
                         //Dòng dưới là test sản phẩm
                         if (!tmp.getOrderStatus().equalsIgnoreCase("Completed")) {

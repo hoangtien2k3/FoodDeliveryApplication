@@ -48,7 +48,7 @@ public class FeedBackAdapter extends RecyclerView.Adapter<FeedBackAdapter.ViewHo
     private final String userId;
 
     //Contructor
-    public FeedBackAdapter(Context mContext, ArrayList<BillInfo> ds, Bill currentBill,String id) {
+    public FeedBackAdapter(Context mContext, ArrayList<BillInfo> ds, Bill currentBill, String id) {
         this.mContext = mContext;
         this.ds = ds;
         this.currentBill = currentBill;
@@ -63,7 +63,7 @@ public class FeedBackAdapter extends RecyclerView.Adapter<FeedBackAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull FeedBackAdapter.ViewHolder holder, int position) {
-        BillInfo item=ds.get(position);
+        BillInfo item = ds.get(position);
 
         holder.binding.edtComment.setText("");
         //Biến lưu lại rate với star bao nhiêu
@@ -79,11 +79,11 @@ public class FeedBackAdapter extends RecyclerView.Adapter<FeedBackAdapter.ViewHo
         FirebaseDatabase.getInstance().getReference("Products").child(item.getProductId()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Product tmp=snapshot.getValue(Product.class);
+                Product tmp = snapshot.getValue(Product.class);
                 //set Thông tin
-                holder.binding.lnBillInfo.txtPrice.setText(CurrencyFormatter.getFormatter().format(item.getAmount()*Double.valueOf(tmp.getProductPrice()))+"");
+                holder.binding.lnBillInfo.txtPrice.setText(CurrencyFormatter.getFormatter().format(item.getAmount() * Double.valueOf(tmp.getProductPrice())) + "");
                 holder.binding.lnBillInfo.txtName.setText(tmp.getProductName());
-                holder.binding.lnBillInfo.txtCount.setText("Count: " +item.getAmount()+"");
+                holder.binding.lnBillInfo.txtCount.setText("Count: " + item.getAmount() + "");
                 Glide.with(mContext)
                         .load(tmp.getProductImage1())
                         .placeholder(R.drawable.default_image)
@@ -108,7 +108,7 @@ public class FeedBackAdapter extends RecyclerView.Adapter<FeedBackAdapter.ViewHo
                 // Văn bản đã đạt tới giới hạn 200 kí tự, không cho phép nhập thêm
                 // Văn bản chưa đạt tới giới hạn 200 kí tự, cho phép nhập tiếp
                 if (s.length() >= 200)
-                    new FailToast(mContext, "Your comment's length must not be over 200 characters!").showToast();
+                    new FailToast(mContext, "Độ dài bình luận của bạn không được vượt quá 200 ký tự!").showToast();
 
             }
 
@@ -129,7 +129,7 @@ public class FeedBackAdapter extends RecyclerView.Adapter<FeedBackAdapter.ViewHo
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            new SuccessfulToast(mContext, "Thank you for giving feedback to my product!").showToast();
+                            new SuccessfulToast(mContext, "Tcảm ơn bạn đã phản hồi về sản phẩm của tôi!").showToast();
                             pushNotificationFeedBack(item);
                             dialog.dismiss();
                             updateListBillInfo(item);
@@ -149,13 +149,13 @@ public class FeedBackAdapter extends RecyclerView.Adapter<FeedBackAdapter.ViewHo
                                 }
                             });
                         } else {
-                            new FailToast(mContext, "Some errors occurred!").showToast();
+                            new FailToast(mContext, "Một số lỗi xảy ra!").showToast();
                             dialog.dismiss();
                         }
                     }
                 });
             } else {
-                AlertDialog.Builder builder=new AlertDialog.Builder(mContext);
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                 builder.setIcon(R.drawable.icon_alert);
                 builder.setTitle("Chú ý");
                 builder.setMessage("Nhớ ghi comment nha bạn ơi!");
@@ -193,12 +193,12 @@ public class FeedBackAdapter extends RecyclerView.Adapter<FeedBackAdapter.ViewHo
         }
     }
 
-    private void setEventForStar(ViewHolder viewHolder,IntegerWrapper starRating) {
-        viewHolder.binding.star1.setOnClickListener(view -> onStarClicked(view,viewHolder,starRating));
-        viewHolder.binding.star2.setOnClickListener(view -> onStarClicked(view,viewHolder,starRating));
-        viewHolder.binding.star3.setOnClickListener(view -> onStarClicked(view,viewHolder,starRating));
-        viewHolder.binding.star4.setOnClickListener(view -> onStarClicked(view,viewHolder,starRating));
-        viewHolder.binding.star5.setOnClickListener(view -> onStarClicked(view,viewHolder,starRating));
+    private void setEventForStar(ViewHolder viewHolder, IntegerWrapper starRating) {
+        viewHolder.binding.star1.setOnClickListener(view -> onStarClicked(view, viewHolder, starRating));
+        viewHolder.binding.star2.setOnClickListener(view -> onStarClicked(view, viewHolder, starRating));
+        viewHolder.binding.star3.setOnClickListener(view -> onStarClicked(view, viewHolder, starRating));
+        viewHolder.binding.star4.setOnClickListener(view -> onStarClicked(view, viewHolder, starRating));
+        viewHolder.binding.star5.setOnClickListener(view -> onStarClicked(view, viewHolder, starRating));
     }
 
     public static FeedBackActivity getFeedBackActivity(Context context) {
@@ -207,7 +207,8 @@ public class FeedBackAdapter extends RecyclerView.Adapter<FeedBackAdapter.ViewHo
         }
         return null;
     }
-    public void onStarClicked(View view,ViewHolder viewHolder, IntegerWrapper starRating) {
+
+    public void onStarClicked(View view, ViewHolder viewHolder, IntegerWrapper starRating) {
         int clickedStarPosition = Integer.parseInt(view.getTag().toString());
         starRating.setValue(clickedStarPosition);
         viewHolder.binding.star1.setImageResource(clickedStarPosition >= 1 ? R.drawable.star_filled : R.drawable.star_none);
@@ -216,7 +217,6 @@ public class FeedBackAdapter extends RecyclerView.Adapter<FeedBackAdapter.ViewHo
         viewHolder.binding.star4.setImageResource(clickedStarPosition >= 4 ? R.drawable.star_filled : R.drawable.star_none);
         viewHolder.binding.star5.setImageResource(clickedStarPosition >= 5 ? R.drawable.star_filled : R.drawable.star_none);
     }
-
 
 
     @Override
@@ -238,8 +238,8 @@ public class FeedBackAdapter extends RecyclerView.Adapter<FeedBackAdapter.ViewHo
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Product product = snapshot.getValue(Product.class);
-                String title = "Product feedback";
-                String content = "Your product '" +product.getProductName() + "' have just got a new feedback. Go to product information to check it.";
+                String title = "Phản hồi về sản phẩm";
+                String content = "Sản phẩm của bạn '" + product.getProductName() + "' vừa có phản hồi mới. Vào thông tin sản phẩm để kiểm tra.";
                 Notification notification = FirebaseNotificationHelper.createNotification(title, content, product.getProductImage1(), product.getProductId(), "None", "None", null);
                 new FirebaseNotificationHelper(mContext).addNotification(product.getPublisherId(), notification, new FirebaseNotificationHelper.DataStatus() {
                     @Override

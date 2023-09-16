@@ -17,8 +17,8 @@ public class LoginSignUpAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        if (position==0) {
-            return  new LoginFragment();
+        if (position == 0) {
+            return new LoginFragment();
         }
         return new SignUpFragment();
     }

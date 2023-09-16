@@ -43,7 +43,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent1 = new Intent(ProfileActivity.this, OrderActivity.class);
-                intent1.putExtra("userId",userId);
+                intent1.putExtra("userId", userId);
                 startActivity(intent1);
             }
         });
@@ -52,7 +52,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent2 = new Intent(ProfileActivity.this, MyShopActivity.class);
-                intent2.putExtra("userId",userId);
+                intent2.putExtra("userId", userId);
                 startActivity(intent2);
             }
         });
@@ -61,7 +61,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
-                intent.putExtra("userId",userId);
+                intent.putExtra("userId", userId);
                 startActivity(intent);
             }
         });
@@ -71,7 +71,7 @@ public class ProfileActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(Color.parseColor("#E8584D"));
         getWindow().setNavigationBarColor(Color.parseColor("#E8584D"));
         setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setTitle("Profile");
+        getSupportActionBar().setTitle("Hồ sơ");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         binding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

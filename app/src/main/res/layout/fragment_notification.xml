@@ -20,7 +20,7 @@
             android:layout_marginStart="35dp"
             android:drawablePadding="10dp"
             android:fontFamily="@font/sfpro_semibold"
-            android:text="Notification"
+            android:text="Thông báo"
             android:textColor="#000000"
             android:textSize="32dp"
             android:textStyle="bold" />

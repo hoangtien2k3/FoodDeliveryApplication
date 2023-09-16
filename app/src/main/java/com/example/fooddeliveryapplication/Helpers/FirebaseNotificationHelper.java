@@ -44,10 +44,13 @@ public class FirebaseNotificationHelper {
     private List<Notification> notificationList = new ArrayList<>();
     private List<Notification> notificationListToNotify = new ArrayList<>();
 
-    public interface DataStatus{
-        void DataIsLoaded(List<Notification> notificationList,List<Notification> notificationListToNotify);
+    public interface DataStatus {
+        void DataIsLoaded(List<Notification> notificationList, List<Notification> notificationListToNotify);
+
         void DataIsInserted();
+
         void DataIsUpdated();
+
         void DataIsDeleted();
     }
 
@@ -57,16 +60,14 @@ public class FirebaseNotificationHelper {
         mReference = mDatabase.getReference();
     }
 
-    public void readNotification (String userId, final FirebaseNotificationHelper.DataStatus dataStatus)
-    {
+    public void readNotification(String userId, final FirebaseNotificationHelper.DataStatus dataStatus) {
         mReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 notificationList.clear();
                 notificationListToNotify.clear();
                 DataSnapshot snapchild = snapshot.child("Notification").child(userId);
-                for (DataSnapshot snap:snapchild.getChildren())
-                {
+                for (DataSnapshot snap : snapchild.getChildren()) {
                     Notification notification = snap.getValue(Notification.class);
                     notificationList.add(notification);
                 }
@@ -80,8 +81,7 @@ public class FirebaseNotificationHelper {
                         return o2.getTime().compareTo(o1.getTime());
                     }
                 });
-                for (int i = 0;i < notificationList.size(); i++)
-                {
+                for (int i = 0; i < notificationList.size(); i++) {
                     if (!notificationList.get(i).isNotified()) {
                         notificationListToNotify.add(notificationList.get(i));
                         mReference.child("Notification").child(userId).child(notificationList.get(i).getNotificationId()).child("notified").setValue(true)
@@ -105,7 +105,8 @@ public class FirebaseNotificationHelper {
             }
         });
     }
-    public void addNotification(String userId,Notification notification, final FirebaseNotificationHelper.DataStatus dataStatus) {
+
+    public void addNotification(String userId, Notification notification, final FirebaseNotificationHelper.DataStatus dataStatus) {
         String key = mReference.child("Notification").child(userId).push().getKey();
         notification.setNotificationId(key);
         mReference.child("Notification").child(userId).child(key).setValue(notification)
@@ -118,7 +119,8 @@ public class FirebaseNotificationHelper {
                     }
                 });
     }
-    public void updateNotification(String userId,Notification notification, final FirebaseNotificationHelper.DataStatus dataStatus) {
+
+    public void updateNotification(String userId, Notification notification, final FirebaseNotificationHelper.DataStatus dataStatus) {
         mReference.child("Notification").child(userId).child(notification.getNotificationId()).setValue(notification)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

@@ -49,11 +49,11 @@ public class SignUpFragment extends Fragment {
                     String pass = binding.edtPass.getText().toString();
                     dialog = new LoadingDialog(getContext());
                     dialog.show();
-                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                User tmp = new User(task.getResult().getUser().getUid(), email, "", name, "01/01/2000", phone);
+                                User tmp = new User(task.getResult().getUser().getUid(), email, "", name, "12/04/2003", phone);
                                 Cart cart = new Cart(FirebaseDatabase.getInstance().getReference().push().getKey(), 0, 0, task.getResult().getUser().getUid());
 
                                 FirebaseDatabase.getInstance().getReference("Users").child(tmp.getUserId())
@@ -63,10 +63,10 @@ public class SignUpFragment extends Fragment {
                                                 if (task.isSuccessful()) {
                                                     dialog.dismiss();
                                                     FirebaseDatabase.getInstance().getReference("Carts").child(cart.getCartId()).setValue(cart);
-                                                    new SuccessfulToast(getContext(), "Create account successfully").showToast();
+                                                    new SuccessfulToast(getContext(), "Tạo tài khoản thành công").showToast();
                                                 } else {
                                                     dialog.dismiss();
-                                                    new FailToast(getContext(),"Create account unsuccessfully").showToast();
+                                                    new FailToast(getContext(), "Tạo tài khoản không thành công").showToast();
                                                 }
                                             }
                                         });
@@ -84,19 +84,17 @@ public class SignUpFragment extends Fragment {
     }
 
     public boolean check() {
-        String phone= binding.edtPhone.getText().toString();
-        String name= binding.edtName.getText().toString();
-        String email= binding.edtEmail.getText().toString();
-        String pass= binding.edtPass.getText().toString();
-        if (phone.isEmpty()|| name.isEmpty()|| email.isEmpty()|| pass.isEmpty()) {
+        String phone = binding.edtPhone.getText().toString();
+        String name = binding.edtName.getText().toString();
+        String email = binding.edtEmail.getText().toString();
+        String pass = binding.edtPass.getText().toString();
+        if (phone.isEmpty() || name.isEmpty() || email.isEmpty() || pass.isEmpty()) {
             createDialog("Điền đầy đủ thông tin").show();
             return false;
-        }
-        else if (!email.matches(String.valueOf(Patterns.EMAIL_ADDRESS))) {
+        } else if (!email.matches(String.valueOf(Patterns.EMAIL_ADDRESS))) {
             createDialog("Email không đúng định dạng").show();
             return false;
-        }
-        else if (!phone.matches("(03|05|07|08|09|01[2689])[0-9]{8}\\b")) {
+        } else if (!phone.matches("(03|05|07|08|09|01[2689])[0-9]{8}\\b")) {
             createDialog("Số điện thoại không hợp lệ").show();
             return false;
         }
@@ -105,9 +103,9 @@ public class SignUpFragment extends Fragment {
 
 
     public AlertDialog createDialog(String message) {
-        AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setMessage(message);
-        builder.setTitle("Notice");
+        builder.setTitle("Thông báo");
         builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {

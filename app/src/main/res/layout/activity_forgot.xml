@@ -36,7 +36,7 @@
             android:id="@+id/loginText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Reset password"
+            android:text="Đặt lại mật khẩu"
             android:textAlignment="center"
             android:textColor="@color/app_color2"
             android:textSize="24sp"
@@ -59,18 +59,17 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-
         <Button
             android:id="@+id/btnReset"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_margin="10dp"
             android:layout_gravity="center"
+            android:layout_margin="10dp"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="10dp"
             android:foreground="?attr/selectableItemBackground"
             android:hint="if (tmp.getRecipientId().equalsIgnoreCase(LoginActivity.getCurrentUser().getUserId()))"
-            android:text="Reset" />
+            android:text="Cập nhật" />
 
         <TextView
             android:id="@+id/forgotpassText"
@@ -78,7 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
             android:gravity="center"
-            android:text="You already have an account ?"
+            android:text="Bạn đã có tài khoản ?"
             android:textColor="@color/app_color2"
             android:textSize="16sp"
             android:textStyle="bold" />

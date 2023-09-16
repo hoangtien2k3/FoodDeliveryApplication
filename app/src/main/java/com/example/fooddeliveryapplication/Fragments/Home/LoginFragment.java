@@ -41,19 +41,19 @@ public class LoginFragment extends Fragment {
 
         binding.btnReset.setOnClickListener(view1 -> {
             if (binding.edtPasswordLogin.getText().toString().isEmpty() || binding.edtEmail.getText().toString().isEmpty()) {
-                new FailToast(getContext(), "Please fill all the information").showToast();
+                new FailToast(getContext(), "Vui lòng điền đầy đủ thông tin").showToast();
             } else {
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(binding.edtEmail.getText().toString(),binding.edtPasswordLogin.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(binding.edtEmail.getText().toString(), binding.edtPasswordLogin.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            String idCurrentUser=FirebaseAuth.getInstance().getCurrentUser().getUid();
+                            String idCurrentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
                             FirebaseDatabase.getInstance().getReference("Users").child(idCurrentUser).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    new SuccessfulToast(getContext(), "Login successfully!").showToast();
+                                    new SuccessfulToast(getContext(), "Đăng nhập thành công!").showToast();
                                     Log.d(TAG, "đăng nhập thành công", task.getException());
-                                    Intent intent=new Intent(getContext(), HomeActivity.class);
+                                    Intent intent = new Intent(getContext(), HomeActivity.class);
                                     startActivity(intent);
                                     requireActivity().finish();
                                 }
@@ -66,18 +66,18 @@ public class LoginFragment extends Fragment {
 
                         } else {
                             Log.w(TAG, "đăng nhập thất bại", task.getException());
-                            new FailToast(getContext(), "Wrong email or password!").showToast();
+                            new FailToast(getContext(), "Sai email hoặc mật khẩu!").showToast();
                         }
                     }
                 });
             }
         });
 
-        TextView txtForgot= view.findViewById(R.id.forgotpassText);
+        TextView txtForgot = view.findViewById(R.id.forgotpassText);
         txtForgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getContext(), ForgotActivity.class);
+                Intent intent = new Intent(getContext(), ForgotActivity.class);
                 startActivity(intent);
             }
         });

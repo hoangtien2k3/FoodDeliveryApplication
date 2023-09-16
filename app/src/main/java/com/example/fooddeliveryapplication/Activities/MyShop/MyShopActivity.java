@@ -27,8 +27,8 @@ public class MyShopActivity extends AppCompatActivity {
         binding.cardMyFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(MyShopActivity.this,MyFoodActivity.class);
-                intent.putExtra("userId",userId);
+                Intent intent = new Intent(MyShopActivity.this, MyFoodActivity.class);
+                intent.putExtra("userId", userId);
                 startActivity(intent);
             }
         });
@@ -44,8 +44,8 @@ public class MyShopActivity extends AppCompatActivity {
         binding.cardDelivery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(MyShopActivity.this, DeliveryManagementActivity.class);
-                intent.putExtra("userId",userId);
+                Intent intent = new Intent(MyShopActivity.this, DeliveryManagementActivity.class);
+                intent.putExtra("userId", userId);
                 startActivity(intent);
             }
         });

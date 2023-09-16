@@ -54,7 +54,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private void initToolbar() {
         setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setTitle("Messages");
+        getSupportActionBar().setTitle("Tin nhắn");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         binding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

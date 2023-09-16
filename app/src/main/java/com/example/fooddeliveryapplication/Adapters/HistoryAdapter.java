@@ -45,7 +45,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         return mListHistoryProducts == null ? 0 : mListHistoryProducts.size();
     }
 
-    public class HistoryViewHolder extends RecyclerView.ViewHolder{
+    public class HistoryViewHolder extends RecyclerView.ViewHolder {
         private final ItemHistoryProductBinding binding;
 
         public HistoryViewHolder(@NonNull ItemHistoryProductBinding binding) {

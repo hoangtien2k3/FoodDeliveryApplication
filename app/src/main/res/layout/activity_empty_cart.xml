@@ -28,7 +28,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/damion"
-        android:text="Hungry now, pick some food"
+        android:text="Đói quá, chọn đồ ăn thôi"
         android:textColor="@color/app_color2"
         android:textSize="28sp"
         android:textStyle="bold" />

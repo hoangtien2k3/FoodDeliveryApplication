@@ -30,13 +30,13 @@
 
         <TextView
             android:id="@+id/txt8"
-            android:gravity="center_vertical"
-            android:textSize="22sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
             android:layout_marginStart="16dp"
-            android:text="Detail Order"
+            android:layout_marginTop="18dp"
+            android:gravity="center_vertical"
+            android:text="Chi tiết đơn hàng"
+            android:textSize="22sp"
             app:layout_constraintStart_toEndOf="@+id/btnBack"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,13 +45,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
-            android:textAlignment="center"
+            android:ellipsize="end"
             android:lines="1"
             android:maxLines="1"
-            android:ellipsize="end"
-            android:layout_marginTop="10dp"
-            android:text="Order ID: randomOrderId1"
+            android:text="ID đơn hàng: randomOrderId1"
+            android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="16dp"
-            android:text="Status:"
+            android:text="Trạng thái:"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtOrderIdDetail" />
@@ -74,10 +74,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="Confirm"
+            android:text="Xác nhận"
             android:textColor="@color/app_color2"
-            android:textStyle="bold"
             android:textSize="16dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/txt4"
             app:layout_constraintStart_toEndOf="@+id/txt4"
             app:layout_constraintTop_toTopOf="@+id/txt4" />
@@ -98,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:text="Address"
+            android:text="Địa chỉ"
             android:textSize="24dp"
             android:textStyle="bold" />
         <androidx.cardview.widget.CardView
@@ -109,6 +109,7 @@
             android:layout_marginEnd="30dp"
             android:layout_marginTop="12dp"
             android:background="#ffffff">
+
             <TextView
                 android:id="@+id/txtAddressDetail"
                 android:layout_width="match_parent"
@@ -116,15 +117,16 @@
                 android:layout_margin="20dp"
                 android:ellipsize="end"
                 android:maxLines="4"
-                android:textSize="18dp"
-                android:text="Address detail" />
+                android:text="địa chỉ chi tiết"
+                android:textSize="18dp" />
         </androidx.cardview.widget.CardView>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="12dp"
-            android:text="Order detail"
+            android:text="Chi tiết đơn đặt"
             android:textSize="24dp"
             android:textStyle="bold" />
         <androidx.cardview.widget.CardView
@@ -142,12 +144,13 @@
                 android:layout_margin="10dp"
                 android:background="#ffffff"/>
         </androidx.cardview.widget.CardView>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="12dp"
-            android:text="Summary"
+            android:text="Tóm tắt"
             android:textSize="24dp"
             android:textStyle="bold" />
         <androidx.cardview.widget.CardView
@@ -169,7 +172,7 @@
                     android:layout_marginBottom="20dp"
                     android:ellipsize="end"
                     android:maxLines="4"
-                    android:text="Total"
+                    android:text="Tổng cộng"
                     android:textSize="18dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />

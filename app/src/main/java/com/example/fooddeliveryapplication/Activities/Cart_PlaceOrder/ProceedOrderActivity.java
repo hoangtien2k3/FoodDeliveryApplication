@@ -229,7 +229,7 @@ public class ProceedOrderActivity extends AppCompatActivity {
 
     private boolean validateDate() {
         if (GlobalConfig.choseAddressId == null) {
-            new FailToast(this, "You must choose delivery address!").showToast();
+            new FailToast(this, "Bạn phải chọn địa chỉ giao hàng!").showToast();
             return false;
         }
 
@@ -268,7 +268,7 @@ public class ProceedOrderActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(Color.parseColor("#E8584D"));
         getWindow().setNavigationBarColor(Color.parseColor("#E8584D"));
         setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setTitle("Proceed order");
+        getSupportActionBar().setTitle("Tiến hành đặt hàng");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         binding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -309,8 +309,8 @@ public class ProceedOrderActivity extends AppCompatActivity {
 
 
     public void pushNotificationCartCompleteForSeller(Bill bill) {
-        String title2 = "New order";
-        String content2 = "Hurry up! There is a new order. Go to Delivery Manage for customer serving!";
+        String title2 = "Đơn đặt hàng mới";
+        String content2 = "Nhanh lên! Có một đơn hàng mới. Vào Quản lý giao hàng để phục vụ khách hàng!";
         Notification notification2 = FirebaseNotificationHelper.createNotification(title2, content2, bill.getImageUrl(), "None", "None", bill.getBillId(), null);
         new FirebaseNotificationHelper(ProceedOrderActivity.this).addNotification(bill.getSenderId(), notification2, new FirebaseNotificationHelper.DataStatus() {
             @Override

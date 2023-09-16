@@ -228,22 +228,22 @@ public class EditProfileActivity extends AppCompatActivity {
         String userNameTxt = binding.userName.getText().toString().trim();
 
         if (emailTxt.equals("")) {
-            new FailToast(this, "Email must not be empty!").showToast();
+            new FailToast(this, "Email bắt buộc không để trống!").showToast();
             return;
         }
 
         if (!Patterns.EMAIL_ADDRESS.matcher(emailTxt).matches()) {
-            new FailToast(this, "Invalid email!!").showToast();
+            new FailToast(this, "Email không hợp lệ!!").showToast();
             return;
         }
 
         if (phoneNumberTxt.equals("")) {
-            new FailToast(this, "Phone number must not be empty!").showToast();
+            new FailToast(this, "Số điện thoại không được để trống!").showToast();
             return;
         }
 
         if (userNameTxt.equals("")) {
-            new FailToast(this, "User name must not be empty!").showToast();
+            new FailToast(this, "Tên người dùng không được để trống!").showToast();
             return;
         }
 
@@ -258,7 +258,7 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    new SuccessfulToast(EditProfileActivity.this, "Updated successfully!").showToast();
+                    new SuccessfulToast(EditProfileActivity.this, "Cập nhật thành công!").showToast();
                 }
             }
         });
@@ -376,13 +376,13 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private void initToolbar() {
         setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setTitle("Edit Profile");
+        getSupportActionBar().setTitle("Chỉnh sửa hồ sơ");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         binding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (binding.update.isEnabled()) {
-                    new CustomAlertDialog(EditProfileActivity.this,"Save changes?");
+                    new CustomAlertDialog(EditProfileActivity.this, "Lưu thanh đổi ?");
                     CustomAlertDialog.binding.btnYes.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -398,8 +398,7 @@ public class EditProfileActivity extends AppCompatActivity {
                         }
                     });
                     CustomAlertDialog.showAlertDialog();
-                }
-                else {
+                } else {
                     finish();
                 }
             }
@@ -423,8 +422,7 @@ public class EditProfileActivity extends AppCompatActivity {
         return MimeTypeMap.getSingleton().getExtensionFromMimeType(getContentResolver().getType(uri));
     }
 
-    private String[] cutDay(String date)
-    {
+    private String[] cutDay(String date) {
         String[] arrOfStr = date.split("/");
         return arrOfStr;
     }

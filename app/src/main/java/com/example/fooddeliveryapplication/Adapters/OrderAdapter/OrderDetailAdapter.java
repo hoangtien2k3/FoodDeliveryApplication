@@ -33,7 +33,7 @@ public class OrderDetailAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(ItemBillinfoBinding.inflate(LayoutInflater.from(context),parent,false));
+        return new ViewHolder(ItemBillinfoBinding.inflate(LayoutInflater.from(context), parent, false));
     }
 
     @Override
@@ -44,9 +44,9 @@ public class OrderDetailAdapter extends RecyclerView.Adapter {
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Product tmp=snapshot.getValue(Product.class);
+                        Product tmp = snapshot.getValue(Product.class);
                         viewHolder.binding.txtName.setText(tmp.getProductName());
-                        viewHolder.binding.txtPrice.setText(CurrencyFormatter.getFormatter().format(Double.valueOf(tmp.getProductPrice())* billInfo.getAmount())+"");
+                        viewHolder.binding.txtPrice.setText(CurrencyFormatter.getFormatter().format(Double.valueOf(tmp.getProductPrice()) * billInfo.getAmount()) + "");
                         Glide.with(context)
                                 .load(tmp.getProductImage1())
                                 .placeholder(R.drawable.default_image)
@@ -59,7 +59,7 @@ public class OrderDetailAdapter extends RecyclerView.Adapter {
                     }
                 }
         );
-        viewHolder.binding.txtCount.setText("Count: "+ billInfo.getAmount()+"");
+        viewHolder.binding.txtCount.setText("Đếm: " + billInfo.getAmount() + "");
     }
 
     @Override
@@ -69,9 +69,10 @@ public class OrderDetailAdapter extends RecyclerView.Adapter {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ItemBillinfoBinding binding;
+
         public ViewHolder(@NonNull ItemBillinfoBinding tmp) {
             super(tmp.getRoot());
-            binding=tmp;
+            binding = tmp;
         }
     }
 }

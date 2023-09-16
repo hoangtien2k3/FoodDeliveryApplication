@@ -2,11 +2,11 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemOrder"
     android:layout_width="match_parent"
     android:layout_height="160dp"
     android:layout_margin="10dp"
     app:cardCornerRadius="15dp"
-    android:id="@+id/itemOrder"
     tools:context=".Activities.Order.OrderActivity">
 
     <LinearLayout
@@ -65,7 +65,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:text="Order ID:"
+                        android:text="ID đơn hàng:"
                         android:textColor="#000000"
                         android:textSize="17sp"
                         android:textStyle="bold" />
@@ -73,12 +73,12 @@
                     <TextView
                         android:id="@+id/txtId"
                         android:layout_width="180dp"
-                        android:lines="1"
-                        android:maxLines="1"
-                        android:ellipsize="end"
                         android:layout_height="match_parent"
                         android:layout_marginStart="5dp"
+                        android:ellipsize="end"
                         android:gravity="center_vertical"
+                        android:lines="1"
+                        android:maxLines="1"
                         android:text="TextView"
                         android:textColor="#000000"
                         android:textSize="17sp"
@@ -88,8 +88,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
                     android:layout_marginTop="-10dp"
+                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -101,7 +101,7 @@
                             android:layout_width="100dp"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
-                            android:text="Confirm"
+                            android:text="Xác nhận"
                             android:textColor="@color/app_color2"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -110,9 +110,9 @@
                         android:id="@+id/textView16"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:textColor="#717171"
                         android:gravity="center_vertical"
-                        android:text="| Date:   "
+                        android:text="| Ngày:   "
+                        android:textColor="#717171"
                         android:textStyle="bold" />
 
                     <TextView
@@ -120,15 +120,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:text="12/12/2000"
+                        android:text="16/09/2023"
                         android:textColor="#000000" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
                     android:layout_marginTop="0dp"
+                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <TextView
@@ -136,7 +136,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:text="Total:"
+                        android:text="Tổng cộng:"
                         android:textColor="#000000"
                         android:textStyle="bold" />
 
@@ -146,10 +146,10 @@
                         android:layout_height="match_parent"
                         android:layout_marginStart="10dp"
                         android:layout_weight="1"
-                        android:textStyle="bold"
                         android:gravity="center_vertical"
                         android:text="100.000 d"
-                        android:textColor="#000000" />
+                        android:textColor="#000000"
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -161,15 +161,14 @@
             android:layout_marginTop="-15dp"
             android:orientation="vertical">
 
-
             <Button
                 android:id="@+id/btnSee"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|right"
-                android:textColor="@color/white"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:text="Xác nhận"
+                android:textColor="@color/white" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

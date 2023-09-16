@@ -51,7 +51,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             app:startIconDrawable="@drawable/baseline_person_24"
-            android:hint="Full name">
+            android:hint="Tên đầy đủ">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
             android:layout_marginTop="-20dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:hint="Phone number">
+            android:hint="Số điện thoại">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -113,7 +113,7 @@
                 android:layout_marginTop="-20dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:hint="Birthday">
+                android:hint="Ngày sinh">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -138,15 +138,15 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/update"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_margin="20dp"
             android:layout_gravity="center"
-            android:text="Update"
-            android:textColor="@color/white"
+            android:layout_margin="20dp"
+            android:elevation="20dp"
             android:enabled="false"
-            android:id="@+id/update"
-            android:elevation="20dp"/>
+            android:text="Cập nhật"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 

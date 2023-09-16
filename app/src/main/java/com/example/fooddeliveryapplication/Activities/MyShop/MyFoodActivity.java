@@ -23,9 +23,10 @@ import java.util.ArrayList;
 
 public class MyFoodActivity extends AppCompatActivity {
     private ActivityMyFoodBinding binding;
-    private ArrayList<Product> ds=new ArrayList<>();
+    private ArrayList<Product> ds = new ArrayList<>();
     private MyShopAdapter adapter;
     private String userId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,9 +37,9 @@ public class MyFoodActivity extends AppCompatActivity {
         getWindow().setNavigationBarColor(Color.parseColor("#E8584D"));
 
         userId = getIntent().getStringExtra("userId");
-        adapter=new MyShopAdapter(ds,MyFoodActivity.this, userId);
+        adapter = new MyShopAdapter(ds, MyFoodActivity.this, userId);
         binding.recycleView.setHasFixedSize(true);
-        binding.recycleView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL,false));
+        binding.recycleView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         binding.recycleView.setAdapter(adapter);
         binding.imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,8 +50,8 @@ public class MyFoodActivity extends AppCompatActivity {
         binding.flpAddFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(MyFoodActivity.this,AddFoodActivity.class);
-                intent.putExtra("userId",userId);
+                Intent intent = new Intent(MyFoodActivity.this, AddFoodActivity.class);
+                intent.putExtra("userId", userId);
                 startActivity(intent);
             }
         });
@@ -59,15 +60,15 @@ public class MyFoodActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        LoadingDialog dialog=new LoadingDialog(this);
+        LoadingDialog dialog = new LoadingDialog(this);
         dialog.show();
         FirebaseDatabase.getInstance().getReference("Products").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ds.clear();
-                for (DataSnapshot item:snapshot.getChildren()) {
-                    Product tmp=item.getValue(Product.class);
-                    if (tmp != null && tmp.getPublisherId()!=null) {
+                for (DataSnapshot item : snapshot.getChildren()) {
+                    Product tmp = item.getValue(Product.class);
+                    if (tmp != null && tmp.getPublisherId() != null) {
                         if (tmp.getPublisherId().equals(userId) && !tmp.getState().equals("deleted")) {
                             ds.add(tmp);
                         }
@@ -75,7 +76,7 @@ public class MyFoodActivity extends AppCompatActivity {
                 }
                 dialog.dismiss();
                 adapter.notifyDataSetChanged();
-             }
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

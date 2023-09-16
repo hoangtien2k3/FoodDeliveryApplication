@@ -46,9 +46,9 @@ public class FoodHomeFrg extends Fragment {
     }
 
     private void initUI() {
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity().getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         binding.rycDrinkHome.setLayoutManager(linearLayoutManager);
-        adapter=new FoodDrinkFrgAdapter(dsFood, userId,getContext());
+        adapter = new FoodDrinkFrgAdapter(dsFood, userId, getContext());
         binding.rycDrinkHome.setAdapter(adapter);
         binding.rycDrinkHome.setHasFixedSize(true);
         binding.txtSeemoreDrink.setOnClickListener(new View.OnClickListener() {

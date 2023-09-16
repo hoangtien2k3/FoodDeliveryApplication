@@ -4,14 +4,14 @@
 
     <item
         android:id="@+id/cart_menu"
-        app:showAsAction="always"
-        android:iconTint="#FFFFFF"
         android:icon="@drawable/ic_cart"
-        android:title="Cart" />
+        android:iconTint="#FFFFFF"
+        android:title="Cart"
+        app:showAsAction="always" />
     <item
         android:id="@+id/message_menu"
-        app:showAsAction="always"
-        android:iconTint="#FFFFFF"
         android:icon="@drawable/baseline_mark_unread_chat_alt_24"
-        android:title="Cart" />
+        android:iconTint="#FFFFFF"
+        android:title="Cart"
+        app:showAsAction="always" />
 </menu>

@@ -29,18 +29,18 @@
         android:id="@+id/txtNameInNavigationBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintWidth_percent="0.8"
-        android:maxLines="1"
         android:layout_marginTop="4dp"
         android:fontFamily="@font/sfpro_semibold"
         android:gravity="center"
-        android:text="Hi, User"
+        android:maxLines="1"
+        android:text="Hi, Hoàng Tiến"
         android:textColor="#000000"
         android:textSize="32sp"
-
         app:layout_constraintEnd_toEndOf="@+id/imgAvatarInNavigationBar"
+
         app:layout_constraintStart_toStartOf="@+id/imgAvatarInNavigationBar"
-        app:layout_constraintTop_toBottomOf="@+id/imgAvatarInNavigationBar" />
+        app:layout_constraintTop_toBottomOf="@+id/imgAvatarInNavigationBar"
+        app:layout_constraintWidth_percent="0.8" />
 
     <TextView
         android:id="@+id/txtHelloInNavigationBar"
@@ -49,9 +49,9 @@
         android:layout_marginTop="-10dp"
         android:fontFamily="@font/sfpro_regularitalic"
         android:shadowColor="#AF6B6B"
-        android:textSize="18dp"
-        android:text="Have a good day!"
+        android:text="Mang lại trải nghiệm tốt nhất"
         android:textColor="#ffffff"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="@+id/txtNameInNavigationBar"
         app:layout_constraintStart_toStartOf="@id/txtNameInNavigationBar"
         app:layout_constraintTop_toBottomOf="@id/txtNameInNavigationBar" />

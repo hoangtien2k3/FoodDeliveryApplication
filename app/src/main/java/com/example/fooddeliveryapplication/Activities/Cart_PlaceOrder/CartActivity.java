@@ -60,7 +60,7 @@ public class CartActivity extends AppCompatActivity {
                 intent.putExtra("buyProducts", buyProducts);
                 String totalPriceDisplay = binding.totalPrice.getText().toString();
                 intent.putExtra("totalPrice", totalPriceDisplay);
-                intent.putExtra("userId",userId);
+                intent.putExtra("userId", userId);
                 proceedOrderLauncher.launch(intent);
             }
         });
@@ -92,6 +92,7 @@ public class CartActivity extends AppCompatActivity {
                                 }
                                 cartProductAdapter.notifyDataSetChanged();
                             }
+
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -131,7 +132,7 @@ public class CartActivity extends AppCompatActivity {
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     Cart cart = ds.getValue(Cart.class);
                     if (cart.getUserId().equals(userId)) {
-                        cartProductAdapter = new CartProductAdapter(CartActivity.this, cartInfoList, cart.getCartId(), isCheckAll,userId);
+                        cartProductAdapter = new CartProductAdapter(CartActivity.this, cartInfoList, cart.getCartId(), isCheckAll, userId);
                         cartProductAdapter.setAdapterItemListener(new IAdapterItemListener() {
                             @Override
                             public void onCheckedItemCountChanged(int count, long price, ArrayList<CartInfo> selectedItems) {
@@ -140,8 +141,7 @@ public class CartActivity extends AppCompatActivity {
 
                                 if (count > 0) {
                                     binding.proceedOrder.setEnabled(true);
-                                }
-                                else {
+                                } else {
                                     binding.proceedOrder.setEnabled(false);
                                 }
                             }
@@ -173,6 +173,7 @@ public class CartActivity extends AppCompatActivity {
                                 }
                                 cartProductAdapter.notifyDataSetChanged();
                             }
+
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -212,8 +213,7 @@ public class CartActivity extends AppCompatActivity {
             if (count == 0) {
                 count = 3;
                 output = "," + temp.charAt(i) + output;
-            }
-            else {
+            } else {
                 output = temp.charAt(i) + output;
             }
         }

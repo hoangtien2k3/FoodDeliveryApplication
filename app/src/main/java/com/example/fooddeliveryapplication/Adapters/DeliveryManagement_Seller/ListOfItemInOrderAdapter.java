@@ -43,19 +43,17 @@ public class ListOfItemInOrderAdapter extends RecyclerView.Adapter<ListOfItemInO
             @Override
             public void DataIsLoaded(Product product) {
                 holder.binding.txtProductNameInDetail.setText(product.getProductName());
-                holder.binding.txtPriceOfItemInDetail.setText(convertToMoney(product.getProductPrice())+" đ");
-                holder.binding.txtCountInDetail.setText("Count: "+String.valueOf(billInfo.getAmount()));
+                holder.binding.txtPriceOfItemInDetail.setText(convertToMoney(product.getProductPrice()) + " đ");
+                holder.binding.txtCountInDetail.setText("Đếm: " + String.valueOf(billInfo.getAmount()));
                 holder.binding.imgProductImageInDetail.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-                try
-                {
+                try {
                     Glide.with(mContext)
                             .asBitmap()
                             .load(product.getProductImage1())
                             .placeholder(R.drawable.background_loading_layout)
                             .into(holder.binding.imgProductImageInDetail);
-                }catch (Exception ex)
-                {
+                } catch (Exception ex) {
 
                 }
             }
@@ -100,8 +98,7 @@ public class ListOfItemInOrderAdapter extends RecyclerView.Adapter<ListOfItemInO
             if (count == 0) {
                 count = 3;
                 output = "," + temp.charAt(i) + output;
-            }
-            else {
+            } else {
                 output = temp.charAt(i) + output;
             }
         }

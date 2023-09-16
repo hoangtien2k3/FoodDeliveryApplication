@@ -30,26 +30,24 @@ public class DetailOfOrderDeliveryManagementActivity extends AppCompatActivity {
         getWindow().setNavigationBarColor(Color.parseColor("#E8584D"));
 
         Intent intent = getIntent();
-        if (null != intent)
-        {
+        if (null != intent) {
             String billId = intent.getStringExtra("billId");
             String addressId = intent.getStringExtra("addressId");
             String recipientId = intent.getStringExtra("recipientId");
             String orderStatus = intent.getStringExtra("orderStatus");
-            long price = intent.getLongExtra("totalBill",-1);
+            long price = intent.getLongExtra("totalBill", -1);
             try {
-                binding.txtOrderIdDetail.setText("Order Id: "+billId);
-                binding.txtBillTotalInDetail.setText(convertToMoney(price)+ "đ");
+                binding.txtOrderIdDetail.setText("Order Id: " + billId);
+                binding.txtBillTotalInDetail.setText(convertToMoney(price) + "đ");
                 binding.txtStatusOrderDetail.setText(orderStatus);
-                if (orderStatus.equals("Completed"))
-                {
+                if (orderStatus.equals("Completed")) {
                     binding.txtStatusOrderDetail.setTextColor(Color.parseColor("#48DC7D"));
                 }
                 new FirebaseOrderDetailHelper().readOrderDetail(addressId, recipientId, billId, new FirebaseOrderDetailHelper.DataStatus() {
                     @Override
                     public void DataIsLoaded(String addresss, List<BillInfo> billInfos) {
                         binding.txtAddressDetail.setText(addresss);
-                        ListOfItemInOrderAdapter adapter = new ListOfItemInOrderAdapter(DetailOfOrderDeliveryManagementActivity.this,billInfos);
+                        ListOfItemInOrderAdapter adapter = new ListOfItemInOrderAdapter(DetailOfOrderDeliveryManagementActivity.this, billInfos);
                         binding.recOrderDetail.setLayoutManager(new LinearLayoutManager(DetailOfOrderDeliveryManagementActivity.this));
                         binding.recOrderDetail.setHasFixedSize(true);
                         binding.recOrderDetail.setAdapter(adapter);
@@ -70,13 +68,11 @@ public class DetailOfOrderDeliveryManagementActivity extends AppCompatActivity {
 
                     }
                 });
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
 
             }
         }
-        
+
         binding.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,8 +91,7 @@ public class DetailOfOrderDeliveryManagementActivity extends AppCompatActivity {
             if (count == 0) {
                 count = 3;
                 output = "," + temp.charAt(i) + output;
-            }
-            else {
+            } else {
                 output = temp.charAt(i) + output;
             }
         }

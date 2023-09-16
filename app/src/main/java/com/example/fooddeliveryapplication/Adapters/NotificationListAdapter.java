@@ -36,7 +36,7 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
     private List<Notification> notificationList;
     private String userId;
 
-    public NotificationListAdapter(Context mContext, List<Notification> notificationList,String id) {
+    public NotificationListAdapter(Context mContext, List<Notification> notificationList, String id) {
         this.mContext = mContext;
         this.notificationList = notificationList;
         userId = id;
@@ -54,23 +54,19 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
         holder.binding.txtTitleNotification.setText(notification.getTitle());
         holder.binding.txtContentNotification.setText(notification.getContent());
         holder.binding.txtTimeNotification.setText(notification.getTime());
-        if (notification.getImageURL().isEmpty())
-        {
+        if (notification.getImageURL().isEmpty()) {
             holder.binding.imgNotification.setImageResource(R.drawable.ic_launcher_background);
-        }
-        else {
+        } else {
             holder.binding.imgNotification.setScaleType(ImageView.ScaleType.CENTER_CROP);
             Glide.with(mContext)
                     .asBitmap()
                     .load(notificationList.get(position).getImageURL())
                     .into(holder.binding.imgNotification);
         }
-        if (!notification.isRead())
-        {
+        if (!notification.isRead()) {
             holder.binding.dotStatusRead.setVisibility(View.VISIBLE);
             holder.binding.backgroundNotificationItem.setBackgroundColor(Color.parseColor("#e3e3e3"));
-        }
-        else {
+        } else {
             holder.binding.dotStatusRead.setVisibility(View.GONE);
             holder.binding.backgroundNotificationItem.setBackgroundColor(Color.TRANSPARENT);
         }
@@ -104,17 +100,14 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
                     });
                 }
 
-                if (!notification.getBillId().equals("None"))
-                {
+                if (!notification.getBillId().equals("None")) {
                     Bill bill = new Bill();
                     bill.setBillId(notification.getBillId());
-                    Intent intent=new Intent(mContext, OrderDetailActivity.class);
+                    Intent intent = new Intent(mContext, OrderDetailActivity.class);
                     intent.putExtra("Bill", bill);
-                    intent.putExtra("userId",userId);
+                    intent.putExtra("userId", userId);
                     mContext.startActivity(intent);
-                }
-                else if (!notification.getProductId().equals("None"))
-                {
+                } else if (!notification.getProductId().equals("None")) {
                     final String[] userName = new String[1];
                     FirebaseDatabase.getInstance().getReference().child("Users").child(userId).addValueEventListener(new ValueEventListener() {
                         @Override
@@ -166,14 +159,11 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
 
                         }
                     });
-                }
-                else if (!notification.getConfirmId().equals("None"))
-                {
-                    Intent intent=new Intent(mContext, DeliveryManagementActivity.class);
-                    intent.putExtra("userId",userId);
+                } else if (!notification.getConfirmId().equals("None")) {
+                    Intent intent = new Intent(mContext, DeliveryManagementActivity.class);
+                    intent.putExtra("userId", userId);
                     mContext.startActivity(intent);
-                }
-                else if (notification.getPublisher() != null) {
+                } else if (notification.getPublisher() != null) {
                     Intent intent = new Intent(mContext, ChatDetailActivity.class);
                     intent.setAction("chatActivity");
                     intent.putExtra("publisher", notification.getPublisher());
@@ -188,7 +178,7 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
         return notificationList == null ? 0 : notificationList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         private final ItemNotificationBinding binding;
 
         public ViewHolder(@NonNull ItemNotificationBinding binding) {

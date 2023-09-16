@@ -17,19 +17,24 @@ public class FirebaseUserInfoHelper {
     private Context mContext;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
-    public interface DataStatus{
+
+    public interface DataStatus {
         void DataIsLoaded(User user);
+
         void DataIsInserted();
+
         void DataIsUpdated();
+
         void DataIsDeleted();
     }
+
     public FirebaseUserInfoHelper(Context context) {
         mContext = context;
         mDatabase = FirebaseDatabase.getInstance();
         mReference = mDatabase.getReference();
     }
-    public void readUserInfo(String userId, final FirebaseUserInfoHelper.DataStatus dataStatus)
-    {
+
+    public void readUserInfo(String userId, final FirebaseUserInfoHelper.DataStatus dataStatus) {
         mReference.child("Users").child(userId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

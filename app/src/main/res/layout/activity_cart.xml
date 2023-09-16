@@ -43,19 +43,19 @@
 
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_marginStart="50dp"
-        android:layout_height="50dp"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/rounded_button"
-        android:layout_alignParentBottom="true"
-        android:text="Order Now"
-        android:textSize="16dp"
-        android:textColor="@color/white"
-        android:enabled="false"
-        android:layout_marginBottom="10dp"
         android:id="@+id/proceed_order"
-        android:elevation="20dp"/>
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/rounded_button"
+        android:elevation="20dp"
+        android:enabled="false"
+        android:text="Đặt hàng ngay"
+        android:textColor="@color/white"
+        android:textSize="16dp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -82,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-thin"
-            android:text="Total"
+            android:text="Tổng cộng:"
             android:textColor="#878787"
             android:textSize="18sp"
             android:textStyle="bold"

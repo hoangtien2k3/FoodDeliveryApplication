@@ -30,7 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
-public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHolder>{
+public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHolder> {
     private Context mContext;
     private List<Address> mAddresses;
     private RadioButton checkedRadioButton;
@@ -58,17 +58,14 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
             holder.binding.choose.setChecked(true);
             holder.binding.defaultText.setVisibility(View.VISIBLE);
             checkedRadioButton = holder.binding.choose;
-        }
-        else if (address.getAddressId().equals(GlobalConfig.choseAddressId)) {
+        } else if (address.getAddressId().equals(GlobalConfig.choseAddressId)) {
             holder.binding.choose.setChecked(true);
             holder.binding.defaultText.setVisibility(View.INVISIBLE);
             checkedRadioButton = holder.binding.choose;
-        }
-        else if (address.getState().equals("default")) {
+        } else if (address.getState().equals("default")) {
             holder.binding.defaultText.setVisibility(View.VISIBLE);
             holder.binding.choose.setChecked(false);
-        }
-        else {
+        } else {
             holder.binding.choose.setChecked(false);
             holder.binding.defaultText.setVisibility(View.INVISIBLE);
         }
@@ -97,28 +94,27 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.ViewHold
                 GlobalConfig.updateAddressId = address.getAddressId();
                 Intent intent = new Intent(mContext, UpdateAddAddressActivity.class);
                 intent.putExtra("mode", "update");
-                intent.putExtra("userId",userId);
-                ((Activity)mContext).startActivityForResult(intent, UPDATE_ADDRESS_REQUEST_CODE);
+                intent.putExtra("userId", userId);
+                ((Activity) mContext).startActivityForResult(intent, UPDATE_ADDRESS_REQUEST_CODE);
             }
         });
 
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                new CustomAlertDialog(mContext,"Delete this address?");
+                new CustomAlertDialog(mContext, "Xóa địa chỉ này?");
                 CustomAlertDialog.binding.btnYes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         if (address.getState().equals("default")) {
-                            new FailToast(mContext, "You cannot delete the default address!").showToast();
+                            new FailToast(mContext, "Bạn không thể xóa địa chỉ mặc định!").showToast();
                             CustomAlertDialog.alertDialog.dismiss();
-                        }
-                        else {
+                        } else {
                             FirebaseDatabase.getInstance().getReference().child("Address").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(address.getAddressId()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        new SuccessfulToast(mContext, "Delete address successfully!").showToast();
+                                        new SuccessfulToast(mContext, "Xóa địa chỉ thành công!").showToast();
                                         CustomAlertDialog.alertDialog.dismiss();
                                         if (addressAdapterListener != null) {
                                             addressAdapterListener.onDeleteAddress();

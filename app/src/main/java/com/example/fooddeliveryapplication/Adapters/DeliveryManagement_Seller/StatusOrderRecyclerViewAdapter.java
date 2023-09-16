@@ -55,8 +55,7 @@ public class StatusOrderRecyclerViewAdapter extends RecyclerView.Adapter<StatusO
                 .load(bill.getImageUrl())
                 .into(holder.binding.imgProductImage);
 
-        if (bill.getOrderStatus().equals("Confirm"))
-        {
+        if (bill.getOrderStatus().equals("Confirm")) {
             holder.binding.btnChangeStatus.setText("Shipping");
             holder.binding.btnChangeStatus.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -74,8 +73,8 @@ public class StatusOrderRecyclerViewAdapter extends RecyclerView.Adapter<StatusO
 
                         @Override
                         public void DataIsUpdated() {
-                            new SuccessfulToast(mContext, "Order has been changed to shipping state!").showToast();
-                            pushNotificationOrderStatusForReceiver(bill.getBillId()," đang giao hàng",bill.getRecipientId(), bill.getImageUrl());
+                            new SuccessfulToast(mContext, "Đơn hàng đã được chuyển sang trạng thái vận chuyển!").showToast();
+                            pushNotificationOrderStatusForReceiver(bill.getBillId(), " đang giao hàng", bill.getRecipientId(), bill.getImageUrl());
                         }
 
                         @Override
@@ -85,10 +84,8 @@ public class StatusOrderRecyclerViewAdapter extends RecyclerView.Adapter<StatusO
                     });
                 }
             });
-        }
-        else if (bill.getOrderStatus().equals("Shipping"))
-        {
-            holder.binding.btnChangeStatus.setText("Completed");
+        } else if (bill.getOrderStatus().equals("Shipping")) {
+            holder.binding.btnChangeStatus.setText("Hoàn thành");
             holder.binding.btnChangeStatus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -105,8 +102,8 @@ public class StatusOrderRecyclerViewAdapter extends RecyclerView.Adapter<StatusO
 
                         @Override
                         public void DataIsUpdated() {
-                            new SuccessfulToast(mContext, "Order has been changed to completed state!").showToast();
-                            pushNotificationOrderStatusForReceiver(bill.getBillId()," giao hàng thành công",bill.getRecipientId(), bill.getImageUrl());
+                            new SuccessfulToast(mContext, "Đơn hàng đã được thay đổi thành trạng thái hoàn thành!").showToast();
+                            pushNotificationOrderStatusForReceiver(bill.getBillId(), " giao hàng thành công", bill.getRecipientId(), bill.getImageUrl());
                         }
 
                         @Override
@@ -116,8 +113,7 @@ public class StatusOrderRecyclerViewAdapter extends RecyclerView.Adapter<StatusO
                     });
                 }
             });
-        }
-        else {
+        } else {
             holder.binding.txtStatus.setTextColor(Color.parseColor("#48DC7D"));
             holder.binding.btnChangeStatus.setVisibility(View.GONE);
         }
@@ -127,11 +123,11 @@ public class StatusOrderRecyclerViewAdapter extends RecyclerView.Adapter<StatusO
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, DetailOfOrderDeliveryManagementActivity.class);
-                intent.putExtra("billId",bill.getBillId());
-                intent.putExtra("addressId",bill.getAddressId());
-                intent.putExtra("recipientId",bill.getRecipientId());
-                intent.putExtra("totalBill",bill.getTotalPrice());
-                intent.putExtra("orderStatus",bill.getOrderStatus());
+                intent.putExtra("billId", bill.getBillId());
+                intent.putExtra("addressId", bill.getAddressId());
+                intent.putExtra("recipientId", bill.getRecipientId());
+                intent.putExtra("totalBill", bill.getTotalPrice());
+                intent.putExtra("orderStatus", bill.getOrderStatus());
                 mContext.startActivity(intent);
             }
         });
@@ -143,7 +139,7 @@ public class StatusOrderRecyclerViewAdapter extends RecyclerView.Adapter<StatusO
         return billList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         private final ItemOrderStatusListBinding binding;
 
         public ViewHolder(@NonNull ItemOrderStatusListBinding binding) {
@@ -161,8 +157,7 @@ public class StatusOrderRecyclerViewAdapter extends RecyclerView.Adapter<StatusO
             if (count == 0) {
                 count = 3;
                 output = "," + temp.charAt(i) + output;
-            }
-            else {
+            } else {
                 output = temp.charAt(i) + output;
             }
         }
@@ -173,13 +168,13 @@ public class StatusOrderRecyclerViewAdapter extends RecyclerView.Adapter<StatusO
         return output;
     }
 
-    public void pushNotificationOrderStatusForReceiver(String billId,String status,String receiverId,String productImage1) {
-        String title = "Order status";
-        String content = "Order "+ billId + " has been updated to "+ status+ ", go to My Order to check it.";
-        Notification notification = FirebaseNotificationHelper.createNotification(title,content,productImage1,"None",billId,"None", null);
+    public void pushNotificationOrderStatusForReceiver(String billId, String status, String receiverId, String productImage1) {
+        String title = "Tình trạng đặt hàng";
+        String content = "Đặt hàng " + billId + " đã được cập nhật thành " + status + ", vào Đơn hàng của tôi để kiểm tra.";
+        Notification notification = FirebaseNotificationHelper.createNotification(title, content, productImage1, "None", billId, "None", null);
         new FirebaseNotificationHelper(mContext).addNotification(receiverId, notification, new FirebaseNotificationHelper.DataStatus() {
             @Override
-            public void DataIsLoaded(List<Notification> notificationList,List<Notification> notificationListToNotify) {
+            public void DataIsLoaded(List<Notification> notificationList, List<Notification> notificationListToNotify) {
 
             }
 

@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:gravity="center_vertical"
-            android:text="Feedback"
+            android:text="Phản hồi"
             android:textSize="22sp" />
 
 

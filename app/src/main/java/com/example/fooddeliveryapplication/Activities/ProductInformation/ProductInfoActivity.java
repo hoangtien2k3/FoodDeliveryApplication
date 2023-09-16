@@ -72,17 +72,17 @@ public class ProductInfoActivity extends AppCompatActivity {
         Intent intent = getIntent();
         productId = intent.getStringExtra("productId");
         productName = intent.getStringExtra("productName");
-        productPrice = intent.getIntExtra("productPrice",0);
+        productPrice = intent.getIntExtra("productPrice", 0);
         productImage1 = intent.getStringExtra("productImage1");
         productImage2 = intent.getStringExtra("productImage2");
         productImage3 = intent.getStringExtra("productImage3");
         productImage4 = intent.getStringExtra("productImage4");
-        ratingStar = intent.getDoubleExtra("ratingStar",0.0);
+        ratingStar = intent.getDoubleExtra("ratingStar", 0.0);
         userName = intent.getStringExtra("userName");
         productDescription = intent.getStringExtra("productDescription");
         publisherId = intent.getStringExtra("publisherId");
         userId = intent.getStringExtra("userId");
-        sold = intent.getIntExtra("sold",0);
+        sold = intent.getIntExtra("sold", 0);
         productType = intent.getStringExtra("productType");
         remainAmount = intent.getIntExtra("remainAmount", 0);
         ratingAmount = intent.getIntExtra("ratingAmount", 0);
@@ -101,14 +101,13 @@ public class ProductInfoActivity extends AppCompatActivity {
             binding.btnCancelFavourite.setVisibility(View.INVISIBLE);
             binding.btnAddFavourite.setVisibility(View.INVISIBLE);
             binding.btnChat.setVisibility(View.INVISIBLE);
-        }
-        else {
+        } else {
             own = false;
             binding.btnEditProduct.setVisibility(View.INVISIBLE);
         }
 
         // set Adapter for image slider
-        ArrayList<String> dsImage =new ArrayList<>();
+        ArrayList<String> dsImage = new ArrayList<>();
         if (productImage1 != null) {
             dsImage.add(productImage1);
         }
@@ -121,7 +120,7 @@ public class ProductInfoActivity extends AppCompatActivity {
         if (productImage4 != null) {
             dsImage.add(productImage4);
         }
-        ProductInfoImageAdapter imageAdapter2=new ProductInfoImageAdapter(this,dsImage);
+        ProductInfoImageAdapter imageAdapter2 = new ProductInfoImageAdapter(this, dsImage);
         binding.pagerProductImage.setAdapter(imageAdapter2);
         binding.tabDots.attachTo(binding.pagerProductImage);
 
@@ -134,13 +133,16 @@ public class ProductInfoActivity extends AppCompatActivity {
             }
 
             @Override
-            public void DataIsInserted() {}
+            public void DataIsInserted() {
+            }
 
             @Override
-            public void DataIsUpdated() {}
+            public void DataIsUpdated() {
+            }
 
             @Override
-            public void DataIsDeleted() {}
+            public void DataIsDeleted() {
+            }
         });
 
 
@@ -149,10 +151,10 @@ public class ProductInfoActivity extends AppCompatActivity {
         final boolean[] isProductExists = new boolean[1];
         final Cart[] currentCart = {new Cart()};
         final CartInfo[] currentCartInfo = {new CartInfo()};
-        new FirebaseArtToCartHelper(userId,productId).readCarts(new FirebaseArtToCartHelper.DataStatus() {
+        new FirebaseArtToCartHelper(userId, productId).readCarts(new FirebaseArtToCartHelper.DataStatus() {
 
             @Override
-            public void DataIsLoaded(Cart cart,CartInfo cartInfo, boolean isExistsCart, boolean isExistsProduct) {
+            public void DataIsLoaded(Cart cart, CartInfo cartInfo, boolean isExistsCart, boolean isExistsProduct) {
                 isCartExists[0] = isExistsCart;
                 isProductExists[0] = isExistsProduct;
                 currentCart[0] = cart;
@@ -186,7 +188,7 @@ public class ProductInfoActivity extends AppCompatActivity {
         binding.btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateCart(isCartExists[0],isProductExists[0],currentCart[0],currentCartInfo[0],1);
+                updateCart(isCartExists[0], isProductExists[0], currentCart[0], currentCartInfo[0], 1);
             }
         });
 
@@ -200,7 +202,7 @@ public class ProductInfoActivity extends AppCompatActivity {
         binding.btnChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(ProductInfoActivity.this, ChatDetailActivity.class);
+                Intent intent = new Intent(ProductInfoActivity.this, ChatDetailActivity.class);
                 intent.setAction("productInfoActivity");
                 intent.putExtra("publisherId", publisherId);
                 startActivity(intent);
@@ -219,42 +221,43 @@ public class ProductInfoActivity extends AppCompatActivity {
     }
 
     // DEFINE FUNCTION
-    public void setCommentRecView()
-    {
+    public void setCommentRecView() {
         new FirebaseProductInfoHelper(productId).readComments(new FirebaseProductInfoHelper.DataStatus() {
             @Override
-            public void DataIsLoaded(List<Comment> commentList,int count, List<String> keys) {
-                CommentRecyclerViewAdapter adapter = new CommentRecyclerViewAdapter(ProductInfoActivity.this,commentList,keys);
+            public void DataIsLoaded(List<Comment> commentList, int count, List<String> keys) {
+                CommentRecyclerViewAdapter adapter = new CommentRecyclerViewAdapter(ProductInfoActivity.this, commentList, keys);
                 binding.recComment.setHasFixedSize(true);
                 binding.recComment.setLayoutManager(new LinearLayoutManager(ProductInfoActivity.this));
                 binding.recComment.setAdapter(adapter);
-                binding.txtRate.setText("("+count+")");
+                binding.txtRate.setText("(" + count + ")");
             }
 
             @Override
-            public void DataIsInserted() {}
+            public void DataIsInserted() {
+            }
 
             @Override
-            public void DataIsUpdated() {}
+            public void DataIsUpdated() {
+            }
 
             @Override
-            public void DataIsDeleted() {}
+            public void DataIsDeleted() {
+            }
         });
 
     }
-    public void updateCart(boolean isCartExists, boolean isProductExists,Cart currentCart,CartInfo currentCartInfo,int amount)
-    {
+
+    public void updateCart(boolean isCartExists, boolean isProductExists, Cart currentCart, CartInfo currentCartInfo, int amount) {
         // truong hop user moi tao chua co gio hang
-        if (!isCartExists)
-        {
+        if (!isCartExists) {
             Cart cart = new Cart();
-            cart.setTotalPrice(productPrice*amount);
+            cart.setTotalPrice(productPrice * amount);
             cart.setTotalAmount(amount);
             cart.setUserId(userId);
             CartInfo cartInfo = new CartInfo();
             cartInfo.setAmount(amount);
             cartInfo.setProductId(productId);
-            new FirebaseArtToCartHelper().addCarts(cart,cartInfo, new FirebaseArtToCartHelper.DataStatus() {
+            new FirebaseArtToCartHelper().addCarts(cart, cartInfo, new FirebaseArtToCartHelper.DataStatus() {
                 @Override
                 public void DataIsLoaded(Cart cart, CartInfo cartInfo, boolean isExistsCart, boolean isExistsProduct) {
 
@@ -262,20 +265,20 @@ public class ProductInfoActivity extends AppCompatActivity {
 
                 @Override
                 public void DataIsInserted() {
-                    new SuccessfulToast(ProductInfoActivity.this, "Added to your favourite list").showToast();
+                    new SuccessfulToast(ProductInfoActivity.this, "Đã thêm vào danh sách yêu thích của bạn").showToast();
                 }
 
                 @Override
-                public void DataIsUpdated() {}
+                public void DataIsUpdated() {
+                }
 
                 @Override
-                public void DataIsDeleted() {}
+                public void DataIsDeleted() {
+                }
             });
-        }
-        else {
+        } else {
             // truong hop chua co san pham hien tai trong gio hang
-            if (!isProductExists)
-            {
+            if (!isProductExists) {
                 FirebaseDatabase.getInstance().getReference().child("Products").child(productId).child("remainAmount").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -284,9 +287,9 @@ public class ProductInfoActivity extends AppCompatActivity {
                             CartInfo cartInfo = new CartInfo();
                             cartInfo.setProductId(productId);
                             cartInfo.setAmount(amount);
-                            currentCart.setTotalAmount(currentCart.getTotalAmount()+amount);
-                            currentCart.setTotalPrice(currentCart.getTotalPrice()+amount*productPrice);
-                            new FirebaseArtToCartHelper().updateCart(currentCart,cartInfo,false ,new FirebaseArtToCartHelper.DataStatus() {
+                            currentCart.setTotalAmount(currentCart.getTotalAmount() + amount);
+                            currentCart.setTotalPrice(currentCart.getTotalPrice() + amount * productPrice);
+                            new FirebaseArtToCartHelper().updateCart(currentCart, cartInfo, false, new FirebaseArtToCartHelper.DataStatus() {
 
                                 @Override
                                 public void DataIsLoaded(Cart cart, CartInfo cartInfo, boolean isExistsCart, boolean isExistsProduct) {
@@ -295,7 +298,7 @@ public class ProductInfoActivity extends AppCompatActivity {
 
                                 @Override
                                 public void DataIsInserted() {
-                                    new SuccessfulToast(ProductInfoActivity.this, "Added to your cart").showToast();
+                                    new SuccessfulToast(ProductInfoActivity.this, "Đã thêm vào danh sách yêu thích của bạn").showToast();
                                 }
 
                                 @Override
@@ -315,27 +318,23 @@ public class ProductInfoActivity extends AppCompatActivity {
 
                     }
                 });
-            }
-            else {  // truong hop da co san pham hien tai trong gio hang
-                new FailToast(ProductInfoActivity.this,"This product has already been in the cart!").showToast();
+            } else {  // truong hop da co san pham hien tai trong gio hang
+                new FailToast(ProductInfoActivity.this, "Sản phẩm này đã có trong giỏ hàng!").showToast();
             }
         }
     }
 
-    public void loadDataFavourite()
-    {
+    public void loadDataFavourite() {
         final boolean[] isExistsFavourite = new boolean[1];
         final boolean[] isExistsFavouriteDetail = new boolean[1];
         new FirebaseFavouriteInfoProductHelper().readFavourite(productId, userId, new FirebaseFavouriteInfoProductHelper.DataStatus() {
             @Override
             public void DataIsLoaded(boolean isFavouriteExists, boolean isFavouriteDetailExists) {
                 if (!own) {
-                    if (isFavouriteDetailExists)
-                    {
+                    if (isFavouriteDetailExists) {
                         binding.btnAddFavourite.setVisibility(View.GONE);
                         binding.btnCancelFavourite.setVisibility(View.VISIBLE);
-                    }
-                    else {
+                    } else {
                         binding.btnAddFavourite.setVisibility(View.VISIBLE);
                         binding.btnCancelFavourite.setVisibility(View.GONE);
                     }
@@ -365,19 +364,18 @@ public class ProductInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // truong hop new user
-                if (!isExistsFavourite[0])
-                {
+                if (!isExistsFavourite[0]) {
 
-                    new FirebaseFavouriteInfoProductHelper().addFavourite(userId,productId, new FirebaseFavouriteInfoProductHelper.DataStatus() {
+                    new FirebaseFavouriteInfoProductHelper().addFavourite(userId, productId, new FirebaseFavouriteInfoProductHelper.DataStatus() {
 
                         @Override
                         public void DataIsLoaded(boolean isFavouriteExists, boolean isFavouriteDetailExists) {
-                            
+
                         }
 
                         @Override
                         public void DataIsInserted() {
-                            new SuccessfulToast(ProductInfoActivity.this, "Added to your favourite list").showToast();
+                            new SuccessfulToast(ProductInfoActivity.this, "Đã thêm vào danh sách yêu thích của bạn").showToast();
                             pushNotificationFavourite();
                         }
 
@@ -391,27 +389,25 @@ public class ProductInfoActivity extends AppCompatActivity {
 
                         }
                     });
-                }
-                else {
-                    if (isExistsFavouriteDetail[0] == false)
-                    {
-                        new FirebaseFavouriteInfoProductHelper().addFavourite(userId,productId, new FirebaseFavouriteInfoProductHelper.DataStatus() {
+                } else {
+                    if (isExistsFavouriteDetail[0] == false) {
+                        new FirebaseFavouriteInfoProductHelper().addFavourite(userId, productId, new FirebaseFavouriteInfoProductHelper.DataStatus() {
 
 
                             @Override
                             public void DataIsLoaded(boolean isFavouriteExists, boolean isFavouriteDetailExists) {
-                                
+
                             }
 
                             @Override
                             public void DataIsInserted() {
-                                new SuccessfulToast(ProductInfoActivity.this,"Added to your favourite list").showToast();
+                                new SuccessfulToast(ProductInfoActivity.this, "Đã thêm vào danh sách yêu thích của bạn").showToast();
                                 pushNotificationFavourite();
                             }
 
                             @Override
                             public void DataIsUpdated() {
-                            
+
                             }
 
                             @Override
@@ -427,12 +423,12 @@ public class ProductInfoActivity extends AppCompatActivity {
         binding.btnCancelFavourite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new FirebaseFavouriteInfoProductHelper().removeFavourite(userId,productId, new FirebaseFavouriteInfoProductHelper.DataStatus() {
+                new FirebaseFavouriteInfoProductHelper().removeFavourite(userId, productId, new FirebaseFavouriteInfoProductHelper.DataStatus() {
 
 
                     @Override
                     public void DataIsLoaded(boolean isFavouriteExists, boolean isFavouriteDetailExists) {
-                        
+
                     }
 
                     @Override
@@ -447,7 +443,7 @@ public class ProductInfoActivity extends AppCompatActivity {
 
                     @Override
                     public void DataIsDeleted() {
-                        new SuccessfulToast(ProductInfoActivity.this, "Removed from your favourite list").showToast();
+                        new SuccessfulToast(ProductInfoActivity.this, "Đã xóa khỏi lis yêu thích của bạnt").showToast();
                     }
                 });
             }
@@ -455,12 +451,12 @@ public class ProductInfoActivity extends AppCompatActivity {
     }
 
     public void pushNotificationFavourite() {
-        String title = "Favourite product";
-        String content = userName + " liked your product: "+ productName + ". Go to Product Information to check it.";
-        Notification notification = FirebaseNotificationHelper.createNotification(title,content,productImage1,productId,"None","None", null);
+        String title = "Sản phẩm yêu thích";
+        String content = userName + " thích sản phẩm của bạn: " + productName + ". Vào Thông tin sản phẩm để kiểm tra.";
+        Notification notification = FirebaseNotificationHelper.createNotification(title, content, productImage1, productId, "None", "None", null);
         new FirebaseNotificationHelper(this).addNotification(publisherId, notification, new FirebaseNotificationHelper.DataStatus() {
             @Override
-            public void DataIsLoaded(List<Notification> notificationList,List<Notification> notificationListToNotify) {
+            public void DataIsLoaded(List<Notification> notificationList, List<Notification> notificationListToNotify) {
 
             }
 

@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class ChatAdapter extends RecyclerView.Adapter {
-    private ViewBinderHelper viewBinderHelper=new ViewBinderHelper();
+    private ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
     private Context context;
     private ArrayList<ItemChatRoom> bunchOfItemChatRooms;
     private ArrayList<ItemChatRoom> currentBunchOfItemChatRooms;
@@ -31,20 +31,20 @@ public class ChatAdapter extends RecyclerView.Adapter {
     public ChatAdapter(Context context, ArrayList<ItemChatRoom> itemChatRooms) {
         this.context = context;
         this.bunchOfItemChatRooms = itemChatRooms;
-        currentBunchOfItemChatRooms=bunchOfItemChatRooms;
+        currentBunchOfItemChatRooms = bunchOfItemChatRooms;
         viewBinderHelper.setOpenOnlyOne(true);
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(ItemChatBinding.inflate(LayoutInflater.from(context),parent,false));
+        return new ViewHolder(ItemChatBinding.inflate(LayoutInflater.from(context), parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ItemChatRoom itemChatRoom = currentBunchOfItemChatRooms.get(position);
-        ViewHolder viewHolder=(ViewHolder) holder;
+        ViewHolder viewHolder = (ViewHolder) holder;
         viewBinderHelper.bind(viewHolder.binding.SwipeRevealLayout, itemChatRoom.getReceiver().getUserId());
         viewHolder.binding.txtNameUser.setText(itemChatRoom.getReceiver().getUserName());
         viewHolder.binding.txtLastMessage.setTextColor(context.getColor(R.color.app_color2));
@@ -63,16 +63,14 @@ public class ChatAdapter extends RecyclerView.Adapter {
         viewHolder.binding.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(context, ChatDetailActivity.class);
+                Intent intent = new Intent(context, ChatDetailActivity.class);
                 intent.setAction("chatActivity");
-                intent.putExtra("publisher",itemChatRoom.getReceiver());
+                intent.putExtra("publisher", itemChatRoom.getReceiver());
                 context.startActivity(intent);
             }
         });
         viewHolder.binding.txtLastMessage.setText(itemChatRoom.getLastMessage().getContent());
     }
-
-
 
 
     @Override
@@ -88,21 +86,21 @@ public class ChatAdapter extends RecyclerView.Adapter {
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
-                String key=charSequence.toString();
+                String key = charSequence.toString();
                 if (key.trim().isEmpty())
-                    currentBunchOfItemChatRooms=bunchOfItemChatRooms;
+                    currentBunchOfItemChatRooms = bunchOfItemChatRooms;
                 else {
-                    ArrayList<ItemChatRoom> tmp=new ArrayList<>();
-                    key=key.toLowerCase();
-                    for (ItemChatRoom item: bunchOfItemChatRooms) {
+                    ArrayList<ItemChatRoom> tmp = new ArrayList<>();
+                    key = key.toLowerCase();
+                    for (ItemChatRoom item : bunchOfItemChatRooms) {
                         if (item.getReceiver().getUserName().toLowerCase().contains(key)) {
                             tmp.add(item);
                         }
                     }
-                    currentBunchOfItemChatRooms=tmp;
+                    currentBunchOfItemChatRooms = tmp;
                 }
-                FilterResults results=new FilterResults();
-                results.values=currentBunchOfItemChatRooms;
+                FilterResults results = new FilterResults();
+                results.values = currentBunchOfItemChatRooms;
                 return results;
             }
 
@@ -116,9 +114,10 @@ public class ChatAdapter extends RecyclerView.Adapter {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ItemChatBinding binding;
+
         public ViewHolder(@NonNull ItemChatBinding tmp) {
             super(tmp.getRoot());
-            binding=tmp;
+            binding = tmp;
         }
     }
 }

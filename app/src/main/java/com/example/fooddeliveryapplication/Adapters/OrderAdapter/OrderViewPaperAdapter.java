@@ -14,13 +14,13 @@ import java.util.ArrayList;
 
 public class OrderViewPaperAdapter extends FragmentStateAdapter {
     private ArrayList<Bill> dsCurrentOrder;
-    private ArrayList <Bill> dsHistoryOrder;
+    private ArrayList<Bill> dsHistoryOrder;
     private String userId;
 
-    public OrderViewPaperAdapter(@NonNull FragmentActivity fragmentActivity, ArrayList<Bill> dsCurrentOrder, ArrayList <Bill> dsHistoryOrder,String id) {
+    public OrderViewPaperAdapter(@NonNull FragmentActivity fragmentActivity, ArrayList<Bill> dsCurrentOrder, ArrayList<Bill> dsHistoryOrder, String id) {
         super(fragmentActivity);
-        this.dsCurrentOrder=dsCurrentOrder;
-        this.dsHistoryOrder=dsHistoryOrder;
+        this.dsCurrentOrder = dsCurrentOrder;
+        this.dsHistoryOrder = dsHistoryOrder;
         this.userId = id;
     }
 

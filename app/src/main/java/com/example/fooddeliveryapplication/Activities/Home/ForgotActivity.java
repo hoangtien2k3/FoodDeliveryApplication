@@ -30,16 +30,16 @@ public class ForgotActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (binding.edtEmail.getText().toString().isEmpty()) {
-                    new FailToast(ForgotActivity.this, "Please enter the email you want to reset password").showToast();
+                    new FailToast(ForgotActivity.this, "Vui lòng nhập email bạn muốn đặt lại mật khẩu").showToast();
                 } else {
                     FirebaseAuth.getInstance().sendPasswordResetEmail(binding.edtEmail.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                new SuccessfulToast(ForgotActivity.this, "Reset password successfully! Please check your email").showToast();
+                                new SuccessfulToast(ForgotActivity.this, "Đặt lại mật khẩu thành công! Vui lòng kiểm tra email của bạn").showToast();
                                 finish();
                             } else {
-                                new FailToast(ForgotActivity.this, "Make sure your enter email is correct!").showToast();
+                                new FailToast(ForgotActivity.this, "Đảm bảo email nhập của bạn là chính xác!").showToast();
                             }
                         }
                     });
