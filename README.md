@@ -7,7 +7,7 @@
 ![image](https://img.shields.io/badge/Messenger-00B2FF?style=for-the-badge&logo=messenger&logoColor=white)
 
 
-FIVEST là ứng dụng mua bán đồ ăn trực tuyến đóng vai trò quan trọng trong nền kinh doanh sản phẩm tại thị trường hiện nay.
+FIVEST là ứng dụng mua bán đồ ăn - đồ uống trực tuyến.
 ## 📚 Giới thiệu
 ![image](https://github.com/SonDangUIT1111/FoodDeliveryApplication/blob/main/UIApp/gioithieu.png)
 
