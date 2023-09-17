@@ -1,6 +1,7 @@
 package com.example.fooddeliveryapplication.Adapters.Home;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -55,6 +56,7 @@ public class FavouriteFoodAdapter extends RecyclerView.Adapter<FavouriteFoodAdap
         return new FavouriteFoodAdapter.ViewHolder(ItemFavouriteProductBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull FavouriteFoodAdapter.ViewHolder holder, int position) {
         Product product = favouriteLists.get(position);

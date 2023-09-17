@@ -3,6 +3,7 @@ package com.example.fooddeliveryapplication.Activities.OrderSellerManagement;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import java.util.Locale;
 public class DetailOfOrderDeliveryManagementActivity extends AppCompatActivity {
     private ActivityDetailOfOrderDeliveryManagementBinding binding;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +39,7 @@ public class DetailOfOrderDeliveryManagementActivity extends AppCompatActivity {
             String orderStatus = intent.getStringExtra("orderStatus");
             long price = intent.getLongExtra("totalBill", -1);
             try {
-                binding.txtOrderIdDetail.setText("Order Id: " + billId);
+                binding.txtOrderIdDetail.setText("ID đơn hàng: " + billId);
                 binding.txtBillTotalInDetail.setText(convertToMoney(price) + "đ");
                 binding.txtStatusOrderDetail.setText(orderStatus);
                 if (orderStatus.equals("Completed")) {

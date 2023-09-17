@@ -1,6 +1,7 @@
 package com.example.fooddeliveryapplication.Activities.MyShop;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -60,6 +61,7 @@ public class AddFoodActivity extends AppCompatActivity {
     private static final int THIRD_IMAGE = 3;
     private static final int FOURTH_IMAGE = 4;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -298,7 +300,7 @@ public class AddFoodActivity extends AppCompatActivity {
             }
             return true;
         } catch (Exception e) {
-            createDialog("Price và Amount chỉ được nhập ký tự là số và không được bỏ trống").create().show();
+            createDialog("Giá cả và Số lượng chỉ được nhập ký tự là số và không được bỏ trống").create().show();
             return false;
         }
     }
@@ -492,7 +494,7 @@ public class AddFoodActivity extends AppCompatActivity {
         AlertDialog.Builder builderDialog = new AlertDialog.Builder(this);
         builderDialog.setTitle("Thông báo")
                 .setMessage("Bạn cần cấp quyền để thực hiện tính năng này")
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         requestRuntimePermission();

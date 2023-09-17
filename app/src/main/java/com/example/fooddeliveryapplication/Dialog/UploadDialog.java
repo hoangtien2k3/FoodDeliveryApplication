@@ -8,15 +8,17 @@ import android.view.Window;
 
 import com.example.fooddeliveryapplication.R;
 
+import java.util.Objects;
+
 public class UploadDialog {
-    private Dialog dialog;
+    private final Dialog dialog;
 
     public UploadDialog(Context context) {
         dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.dialog_upload);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 
     public void show() {

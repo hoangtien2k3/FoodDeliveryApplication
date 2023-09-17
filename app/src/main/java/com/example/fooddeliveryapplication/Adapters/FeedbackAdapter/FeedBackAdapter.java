@@ -1,5 +1,6 @@
 package com.example.fooddeliveryapplication.Adapters.FeedbackAdapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Handler;
@@ -40,6 +41,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class FeedBackAdapter extends RecyclerView.Adapter<FeedBackAdapter.ViewHolder> {
     private final Context mContext;
@@ -77,13 +79,14 @@ public class FeedBackAdapter extends RecyclerView.Adapter<FeedBackAdapter.ViewHo
 
         //Tìm thông tin products
         FirebaseDatabase.getInstance().getReference("Products").child(item.getProductId()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Product tmp = snapshot.getValue(Product.class);
                 //set Thông tin
                 holder.binding.lnBillInfo.txtPrice.setText(CurrencyFormatter.getFormatter().format(item.getAmount() * Double.valueOf(tmp.getProductPrice())) + "");
                 holder.binding.lnBillInfo.txtName.setText(tmp.getProductName());
-                holder.binding.lnBillInfo.txtCount.setText("Count: " + item.getAmount() + "");
+                holder.binding.lnBillInfo.txtCount.setText("Đếm: " + item.getAmount() + "");
                 Glide.with(mContext)
                         .load(tmp.getProductImage1())
                         .placeholder(R.drawable.default_image)
@@ -119,7 +122,7 @@ public class FeedBackAdapter extends RecyclerView.Adapter<FeedBackAdapter.ViewHo
         });
         //Set sự kiện cho button
         holder.binding.btnSend.setOnClickListener(view -> {
-            if (!holder.binding.edtComment.getText().toString().isEmpty()) {
+            if (!Objects.requireNonNull(holder.binding.edtComment.getText()).toString().isEmpty()) {
                 UploadDialog dialog = new UploadDialog(mContext);
                 dialog.show();
 
@@ -165,7 +168,7 @@ public class FeedBackAdapter extends RecyclerView.Adapter<FeedBackAdapter.ViewHo
 
                     }
                 });
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 

@@ -1,5 +1,6 @@
 package com.example.fooddeliveryapplication.Adapters.OrderAdapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -48,6 +49,7 @@ public class OrderAdapter extends RecyclerView.Adapter {
         return new ViewHolder(ItemOrderLayoutBinding.inflate(LayoutInflater.from(context), parent, false));
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Bill tmp = dsOrder.get(position);

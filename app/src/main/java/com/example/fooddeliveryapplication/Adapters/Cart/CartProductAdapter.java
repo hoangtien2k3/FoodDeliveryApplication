@@ -1,5 +1,6 @@
 package com.example.fooddeliveryapplication.Adapters.Cart;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -104,11 +105,12 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
         holder.binding.checkBox.setChecked(isCheckAll);
 
         FirebaseDatabase.getInstance().getReference().child("Products").child(cartInfo.getProductId()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Product product = snapshot.getValue(Product.class);
                 holder.binding.productName.setText(product.getProductName());
-                holder.binding.productPrice.setText(convertToMoney(product.getProductPrice()) + "đ");
+                holder.binding.productPrice.setText(convertToMoney(product.getProductPrice()) + "vnd");
                 Glide.with(mContext).load(product.getProductImage1()).placeholder(R.mipmap.ic_launcher).into(holder.binding.productImage);
                 holder.binding.productAmount.setText(String.valueOf(cartInfo.getAmount()));
             }

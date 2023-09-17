@@ -1,6 +1,7 @@
 package com.example.fooddeliveryapplication.Adapters.OrderAdapter;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -36,17 +37,20 @@ public class OrderDetailAdapter extends RecyclerView.Adapter {
         return new ViewHolder(ItemBillinfoBinding.inflate(LayoutInflater.from(context), parent, false));
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
         BillInfo billInfo = ds.get(position);
         FirebaseDatabase.getInstance().getReference("Products").child(billInfo.getProductId()).addListenerForSingleValueEvent(
                 new ValueEventListener() {
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Product tmp = snapshot.getValue(Product.class);
+                        assert tmp != null;
                         viewHolder.binding.txtName.setText(tmp.getProductName());
-                        viewHolder.binding.txtPrice.setText(CurrencyFormatter.getFormatter().format(Double.valueOf(tmp.getProductPrice()) * billInfo.getAmount()) + "");
+                        viewHolder.binding.txtPrice.setText(CurrencyFormatter.getFormatter().format((double) tmp.getProductPrice() * billInfo.getAmount()) + "");
                         Glide.with(context)
                                 .load(tmp.getProductImage1())
                                 .placeholder(R.drawable.default_image)

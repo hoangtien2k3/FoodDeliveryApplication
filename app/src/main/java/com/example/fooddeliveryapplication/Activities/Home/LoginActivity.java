@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         binding.tablayoutHome.addTab(binding.tablayoutHome.newTab().setText("Đăng nhập"));
-        binding.tablayoutHome.addTab(binding.tablayoutHome.newTab().setText("Đăng xuất"));
+        binding.tablayoutHome.addTab(binding.tablayoutHome.newTab().setText("Đăng ký"));
         binding.tablayoutHome.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

@@ -1,5 +1,6 @@
 package com.example.fooddeliveryapplication.Activities.Order;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -94,6 +95,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("SetTextI18n")
     private void initUI() {
         String status = currentBill.getOrderStatus();
         if (status.equalsIgnoreCase("Completed")) {
@@ -108,7 +110,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         binding.lnOderDetail.ryc.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         binding.lnOderDetail.ryc.setAdapter(adapter);
         binding.lnOderDetail.ryc.setHasFixedSize(true);
-        binding.lnOderDetail.txtTotalPrice.setText(convertToMoney(currentBill.getTotalPrice()) + "đ");
+        binding.lnOderDetail.txtTotalPrice.setText(convertToMoney(currentBill.getTotalPrice()) + "vnd");
         binding.txtId.setText(currentBill.getBillId());
         binding.imgBack.setOnClickListener(new View.OnClickListener() {
             @Override

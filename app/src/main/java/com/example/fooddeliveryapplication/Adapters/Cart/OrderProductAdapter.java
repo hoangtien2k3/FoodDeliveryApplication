@@ -1,5 +1,6 @@
 package com.example.fooddeliveryapplication.Adapters.Cart;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -39,11 +40,12 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
         CartInfo cartInfo = mCartInfos.get(position);
 
         FirebaseDatabase.getInstance().getReference().child("Products").child(cartInfo.getProductId()).addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Product product = snapshot.getValue(Product.class);
                 holder.binding.orderProductName.setText(product.getProductName());
-                holder.binding.orderProductPrice.setText(convertToMoney(product.getProductPrice()) + "đ");
+                holder.binding.orderProductPrice.setText(convertToMoney(product.getProductPrice()) + "vnd");
                 Glide.with(mContext.getApplicationContext()).load(product.getProductImage1()).placeholder(R.mipmap.ic_launcher).into(holder.binding.orderProductImage);
                 holder.binding.amount.setText(String.valueOf("Đếm: " + cartInfo.getAmount()));
             }

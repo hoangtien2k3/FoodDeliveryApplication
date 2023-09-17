@@ -11,7 +11,7 @@ import com.example.fooddeliveryapplication.databinding.ItemIntroBinding;
 
 import java.util.ArrayList;
 
-public class IntroAdapter  extends  RecyclerView.Adapter{
+public class IntroAdapter extends RecyclerView.Adapter {
     private ArrayList<Integer> ds;
     private Activity context;
 
@@ -23,12 +23,12 @@ public class IntroAdapter  extends  RecyclerView.Adapter{
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new IntroAdapter.ViewHolder(ItemIntroBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false));
+        return new IntroAdapter.ViewHolder(ItemIntroBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ViewHolder viewHolder=(ViewHolder) holder;
+        ViewHolder viewHolder = (ViewHolder) holder;
         viewHolder.binding.img.setImageResource(ds.get(position));
     }
 

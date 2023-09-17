@@ -1,5 +1,6 @@
 package com.example.fooddeliveryapplication.Adapters.Home;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +44,7 @@ public class ChatDetailAdapter extends RecyclerView.Adapter {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Message message = ds.get(position);
@@ -50,7 +52,7 @@ public class ChatDetailAdapter extends RecyclerView.Adapter {
         if (getItemViewType(position) == ITEM_SEND) {
             SendViewHolder viewHolder = (SendViewHolder) holder;
             viewHolder.binding.txtMessage.setText(message.getContent());
-            if (message.isSeen() == true) {
+            if (message.isSeen()) {
                 viewHolder.binding.txtTime.setText(formatHour.format(new Date(message.getTimeStamp())) + " Seen");
                 viewHolder.binding.imgCheck.setVisibility(View.GONE);
             } else {

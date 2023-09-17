@@ -1,5 +1,6 @@
 package com.example.fooddeliveryapplication.Activities.MyShop;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -63,6 +64,7 @@ public class MyFoodActivity extends AppCompatActivity {
         LoadingDialog dialog = new LoadingDialog(this);
         dialog.show();
         FirebaseDatabase.getInstance().getReference("Products").addListenerForSingleValueEvent(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ds.clear();

@@ -1,5 +1,6 @@
 package com.example.fooddeliveryapplication.Adapters.Home;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -58,6 +59,7 @@ public class FindAdapter extends RecyclerView.Adapter implements Filterable {
         return new ViewHolder(ItemHomeFindLayoutBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Product item = ds.get(position);

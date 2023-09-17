@@ -90,7 +90,7 @@ public class ProductInfoActivity extends AppCompatActivity {
 
         // set up default value
         binding.txtNameProduct.setText(productName);
-        binding.txtPriceProduct.setText(CurrencyFormatter.getFormatter().format(Double.valueOf(productPrice)));
+        binding.txtPriceProduct.setText(CurrencyFormatter.getFormatter().format((double) productPrice));
         binding.txtDesciption.setText(productDescription);
         binding.txtSell.setText(String.valueOf(sold));
         binding.ratingBar.setRating(ratingStar.floatValue());
